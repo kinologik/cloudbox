@@ -117,11 +117,6 @@ launcher_icon_size = 24
 # Specify icon theme names with launcher_icon_theme. 
 # if you have an XSETTINGS manager running (like xfsettingsd), tint2 will follow your current theme.
 launcher_icon_theme = gnome-colors-statler
-# Each launcher_item_app must be a full path to a .desktop file
-launcher_item_app = /usr/share/applications/terminator.desktop
-launcher_item_app = /usr/share/applications/xfce4-file-manager.desktop
-launcher_item_app = /usr/share/applications/gedit.desktop
-launcher_item_app = /usr/share/applications/iceweasel.desktop
 
 # System Tray
 systray = 1
@@ -139,8 +134,6 @@ time1_font = Liberation Sans 11
 clock_font_color = #b5b5b5 100
 clock_padding = 12 4
 clock_background_id = 0
-clock_lclick_command = gsimplecal
-clock_rclick_command = gsimplecal
 
 # Tooltips
 tooltip = 1
