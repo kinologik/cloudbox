@@ -1,0 +1,17 @@
+[global_config]
+  title_transmit_bg_color = "#d64937"
+[keybindings]
+[profiles]
+  [[default]]
+    use_system_font = False
+    font = DejaVu Sans Mono 8
+    background_image = None
+[layouts]
+  [[default]]
+    [[[child1]]]
+      type = Terminal
+      parent = window0
+    [[[window0]]]
+      type = Window
+      parent = ""
+[plugins]
