@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openbox_menu xmlns="http://openbox.org/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://openbox.org/                 file:///usr/share/openbox/menu.xsd">
+	<menu id="root-menu" label="Openbox 3">
+		<item label="Terminal emulator">
+			<action name="Execute">
+				<execute>x-terminal-emulator</execute>
+			</action>
+		</item>
+		<item label="File Manager">
+			<action name="Execute">
+				<execute>pcmanfm</execute>
+			</action>
+		</item>
+		<item label="Web Browser">
+			<action name="Execute">
+				<execute>chromium-browser -incognito</execute>
+			</action>
+		</item>
+		<separator/>
+		<menu id="openbox" label="Openbox">
+			<item label="Configuration">
+				<action name="Execute">
+					<execute>obconf</execute>
+				</action>
+			</item>
+			<item label="Menu">
+				<action name="Execute">
+					<execute>obmenu</execute>
+				</action>
+			</item>
+		</menu>
+		<item label="Change Wallpaper">
+			<action name="Execute">
+				<execute>nitrogen</execute>
+			</action>
+		</item>
+		<item label="Change Theme">
+			<action name="Execute">
+				<execute>gtk-chtheme</execute>
+			</action>
+		</item>
+		<separator/>
+		<item label="Reconfigure">
+			<action name="Reconfigure"/>
+		</item>
+		<item label="Restart">
+			<action name="Restart"/>
+		</item>
+		<separator/>
+		<item label="Exit">
+			<action name="Exit"/>
+		</item>
+	</menu>
+</openbox_menu>
