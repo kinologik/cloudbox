@@ -2,22 +2,22 @@ i: /usr/share/pixmaps/wbar/dock.png
 c: wbar --bpress --above-desk --pos bottom --isize 40 --idist 6 --balfa 65
 t: /usr/share/fonts/truetype/oxygen-fonts/Oxygen-Sans-Bold/10
 
-i: /root/.icons/Pacifica/256x256/apps/tilda.png
+i: /usr/share/icons/Pacifica/256x256/apps/tilda.png
 c: terminator
 t: Terminal
 
-i: /root/.icons/Pacifica/256x256/apps/system-file-manager.png
+i: /usr/share/icons/Pacifica/256x256/apps/system-file-manager.png
 c: pcmanfm
 t: File Manager
 
-i: /root/.icons/Pacifica/256x256/apps/input-tablet.png
+i: /usr/share/icons/Pacifica/256x256/apps/input-tablet.png
 c: geany
 t: Text Editor
 
-i: /root/.icons/Pacifica/256x256/apps/chromium-browser.png
+i: /usr/share/icons/Pacifica/256x256/apps/chromium-browser.png
 c: chromium-browser -incognito
 t: Browser
 
-i: /root/.icons/Pacifica/256x256/apps/applications-system.png
+i: /usr/share/icons/Pacifica/256x256/apps/applications-system.png
 c: wbar-config
 t: Configuration
