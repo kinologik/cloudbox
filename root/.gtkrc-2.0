@@ -1,0 +1,11 @@
+include "/usr/share/themes/Numix/gtk-2.0/gtkrc"
+
+style "user-font" {
+	font_name = "Oxygen-Sans 10"
+}
+
+widget_class "*" style "user-font"
+
+gtk-font-name="Oxygen-Sans 10"
+
+include "/root/.gtkrc.mine"
