@@ -1,6 +1,6 @@
 i: /usr/share/pixmaps/wbar/dock.png
 c: wbar --bpress --above-desk --pos bottom --isize 40 --idist 6 --balfa 65
-t: ~/.fonts/oxygen-fonts/Oxygen-Sans-Bold/10
+t: /root/.fonts/oxygen-fonts/Oxygen-Sans-Bold/10
 
 i: /usr/share/icons/Pacifica/256x256/apps/tilda.png
 c: terminator
