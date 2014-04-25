@@ -13,7 +13,7 @@
 		</item>
 		<item label="Web Browser">
 			<action name="Execute">
-				<execute>chromium-browser -incognito</execute>
+				<execute>chromium -incognito</execute>
 			</action>
 		</item>
 		<separator/>
