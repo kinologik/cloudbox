@@ -40,6 +40,12 @@
 			</action>
 		</item>
 		<separator/>
+		<item label="Manage Packages">
+			<action name="Execute">
+				<execute>synaptic</execute>
+			</action>
+		</item>
+		<separator/>
 		<item label="Reconfigure">
 			<action name="Reconfigure"/>
 		</item>
