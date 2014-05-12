@@ -1,1 +1,2 @@
 deb http://www.rabbitmq.com/debian/ testing main
+deb-src http://www.rabbitmq.com/debian/ testing main
