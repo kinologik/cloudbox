@@ -1,1 +1,2 @@
 deb http://repos.sensuapp.org/apt sensu main
+deb-src http://repos.sensuapp.org/apt sensu main
