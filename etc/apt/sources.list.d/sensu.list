@@ -1,2 +1,2 @@
-deb http://repos.sensuapp.org/apt sensu main
-deb-src http://repos.sensuapp.org/apt sensu main
+deb http://repos.sensuapp.org/apt sensu unstable
+deb-src http://repos.sensuapp.org/apt sensu unstable
