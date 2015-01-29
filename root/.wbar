@@ -15,7 +15,7 @@ c: geany
 t: Text Editor
 
 i: /usr/share/icons/Pacifica/256x256/apps/chromium-browser.png
-c: chromium-browser -incognito
+c: chromium -incognito
 t: Browser
 
 i: /usr/share/icons/Pacifica/256x256/apps/applications-system.png
