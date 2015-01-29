@@ -18,10 +18,6 @@ i: /usr/share/icons/Pacifica/256x256/apps/chromium-browser.png
 c: chromium-browser -incognito
 t: Browser
 
-i: /usr/share/icons/hicolor/128x128/apps/mysql-workbench.png
-c: mysql-workbench
-t: MySQL Workbench
-
 i: /usr/share/icons/Pacifica/256x256/apps/applications-system.png
 c: wbar-config
 t: Configuration
