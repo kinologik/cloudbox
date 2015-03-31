@@ -14,10 +14,6 @@ i: /usr/share/icons/Pacifica/256x256/apps/input-tablet.png
 c: geany
 t: Text Editor
 
-i: /usr/share/icons/Pacifica/256x256/apps/chromium-browser.png
-c: chromium -incognito
-t: Browser
-
 i: /usr/share/icons/Pacifica/256x256/apps/applications-system.png
 c: wbar-config
 t: Configuration
