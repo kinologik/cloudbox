@@ -1,0 +1,2 @@
+deb http://ppa.launchpad.net/nginx/development/ubuntu vivid main 
+deb-src http://ppa.launchpad.net/nginx/development/ubuntu vivid main
