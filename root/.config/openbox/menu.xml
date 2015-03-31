@@ -11,11 +11,6 @@
 				<execute>pcmanfm</execute>
 			</action>
 		</item>
-		<item label="Web Browser">
-			<action name="Execute">
-				<execute>chromium -incognito</execute>
-			</action>
-		</item>
 		<separator/>
 		<menu id="openbox" label="Openbox">
 			<item label="Configuration">
@@ -37,12 +32,6 @@
 		<item label="Change Theme">
 			<action name="Execute">
 				<execute>gtk-chtheme</execute>
-			</action>
-		</item>
-		<separator/>
-		<item label="Manage Packages">
-			<action name="Execute">
-				<execute>synaptic</execute>
 			</action>
 		</item>
 		<separator/>
