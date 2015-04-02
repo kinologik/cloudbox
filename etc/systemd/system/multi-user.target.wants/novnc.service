@@ -1,0 +1,10 @@
+[Unit]
+Description=noVNC
+
+[Service]
+ExecStart=/root/.scripts/novnc.sh
+Restart=always
+
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=noVNC
