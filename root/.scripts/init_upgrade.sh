@@ -55,15 +55,12 @@ function clear_history
 
 ##### Main
 
-while [ "$1" != "" ]; do
-    case $1 in
-        -pw | --password )	shift
-                                NEWPW=$1
+case $1 in
+	-pw | --password )	NEWPW=$2
                                 ;;
         * )                     echo "No argument - Exiting..."
                                 exit $?
-    esac
-done
+esac
 
 if [ -z "$NEWPW" ]
 then
