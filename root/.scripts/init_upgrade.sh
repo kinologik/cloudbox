@@ -2,10 +2,6 @@
 
 ##### Constants
 
-TITLE="System Information for $HOSTNAME"
-RIGHT_NOW=$(date +"%x %r %Z")
-TIME_STAMP="Updated on $RIGHT_NOW by $USER"
-
 NEWPW=""
 
 ##### Functions
