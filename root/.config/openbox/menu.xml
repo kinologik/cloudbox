@@ -17,6 +17,12 @@
 			</action>
 		</item>
 		<separator/>
+		<item label="Empty Trash">
+			<action name="Execute">
+				<execute>/root/.scripts/emptyTrash.sh</execute>
+			</action>
+		</item>
+		<separator/>
 		<menu id="openbox" label="Openbox">
 			<item label="Configuration">
 				<action name="Execute">
