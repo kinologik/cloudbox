@@ -11,6 +11,11 @@
 				<execute>pcmanfm</execute>
 			</action>
 		</item>
+		<item label="Text Editor">
+			<action name="Execute">
+				<execute>geany</execute>
+			</action>
+		</item>
 		<separator/>
 		<menu id="openbox" label="Openbox">
 			<item label="Configuration">
