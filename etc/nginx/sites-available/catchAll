@@ -1,0 +1,11 @@
+server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+
+	server_name *.{{domain}};
+	
+	root /var/www/html/*.{{domain}};
+	index index.html;
+
+	error_page 404 /404.html;
+}
