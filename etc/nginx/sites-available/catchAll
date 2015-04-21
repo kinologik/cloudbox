@@ -1,11 +1,16 @@
-server {
-	listen 80 default_server;
-	listen [::]:80 default_server;
-
-	server_name *.{{domain}};
-	
-	root /var/www/html/*.{{domain}};
-	index index.html;
-
-	error_page 404 /404.html;
+http {
+  index index.html;
+ 
+  server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    listen 443 default_server;
+    listen [::]:443 default_server;
+    
+    server_name *.{{domain}};
+    root /var/www/html/*.{{domain}};
+    
+    access_log /var/log/nginx/access/default.log main;
+    server_name_in_redirect off;
+  }
 }
