@@ -5,9 +5,6 @@ server {
     listen 443 ssl default_server;
   	listen [::]:443 ssl default_server;
     
-    ## ssl_certificate /etc/ssl/{{domain}}/certs/{{domain}}.pem;
-    ## ssl_certificate_key /etc/ssl/{{domain}}/private/{{domain}}.key;
-    
     server_name *.{{domain}};
     
     root /var/www/html/*.{{domain}};
