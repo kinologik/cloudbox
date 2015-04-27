@@ -35,6 +35,7 @@ if [ $(tty) == /dev/tty1 ]; then
 				curl -o /etc/apt/sources.list.d/pacifica.list ${CBURL}/etc/apt/sources.list.d/pacifica.list
 				apt-get update
 				apt-get -y install pacifica-icon-theme
+				ln -s /usr/share/icons/Pacifica ${HOME}/.icons/Pacifica
 			
 			# Numix
 				apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0F164EEB
@@ -48,6 +49,7 @@ if [ $(tty) == /dev/tty1 ]; then
 				
 		# Themes
 			# Numix
+				apt-get -y install numix-gtk-theme
 				curl -o ${HOME}/.gtkrc.mine ${CBURL}/root/.gtkrc.mine
 				curl -o ${HOME}/.gtkrc-2.0 ${CBURL}/root/.gtkrc-2.0
 				curl --create-dirs -o ${HOME}/.config/gtk-3.0/settings.ini ${CBURL}/root/.config/gtk-3.0/settings.ini
