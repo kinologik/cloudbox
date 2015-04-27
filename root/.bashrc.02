@@ -25,22 +25,23 @@ if [ $(tty) == /dev/tty1 ]; then
 	## Fonts, Icons && Theme ##
 		# Fonts
 			# Oxygen
-			curl https://dl.dropboxusercontent.com/s/ixzd0g4qy19wnya/font.oxygen.tar.gz | tar -zxvf - -C ${HOME}
+				curl https://dl.dropboxusercontent.com/s/ixzd0g4qy19wnya/font.oxygen.tar.gz | tar -zxvf - -C ${HOME}
 		# Icons
 			# Pacifica
-			# apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 87DD42B5
-			# curl -o /etc/apt/sources.list.d/pacifica.list ${CBURL}/etc/apt/sources.list.d/pacifica.list
-			# apt-get update
-			# apt-get -y install pacifica-icon-theme
+				apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 87DD42B5
+				curl -o /etc/apt/sources.list.d/pacifica.list ${CBURL}/etc/apt/sources.list.d/pacifica.list
+				apt-get update
+				apt-get -y install pacifica-icon-theme
 			
 			# Numix
-			# apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0F164EEB
-			# curl -o /etc/apt/sources.list.d/numix.list ${CBURL}/etc/apt/sources.list.d/numix.list
-			# apt-get update
-			# apt-get -y install numix-icon-theme
+				apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0F164EEB
+				curl -o /etc/apt/sources.list.d/numix.list ${CBURL}/etc/apt/sources.list.d/numix.list
+				apt-get update
+				apt-get -y install numix-icon-theme
 			
 			# Ardis
-			git clone https://github.com/KotusWorks/Ardis-icon-theme.git ${HOME}/.icons/Ardis-icon-theme
+				## svg icons -- won't work with Wbar atm ##
+				# git clone https://github.com/KotusWorks/Ardis-icon-theme.git ${HOME}/.icons/Ardis-icon-theme
 
 	## Compositor ##
 		apt-get -y install compton
@@ -59,8 +60,17 @@ if [ $(tty) == /dev/tty1 ]; then
 		curl --create-dirs -o ${HOME}/.config/tint2/tint2rc ${CBURL}/root/.config/tint2/tint2rc
 
 	## Launcher ##
-		apt-get -y install wbar wbar-config
-		curl -o ${HOME}/.wbar ${CBURL}/root/.wbar
+		# Wbar
+			## NB :: Does not support svg files ##
+			apt-get -y install wbar wbar-config
+			curl -o ${HOME}/.wbar ${CBURL}/root/.wbar
+		
+		# Plank
+			## libplank0 won't install -- looking for fix ##
+			# apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9E5DB0C8
+			# curl -o /etc/apt/sources.list.d/plank.list ${CBURL}/etc/apt/sources.list.d/plank.list
+			# apt-get update
+			# apt-get -y install plank
 
 	## Terminal ##
 		apt-get -y install terminator
