@@ -14,7 +14,8 @@ if [ $(tty) == /dev/tty1 ]; then
 		curl -o ${PRESEED} ${CBURL}/root/preseed.cfg
 		debconf-set-selections --verbose < ${PRESEED}
 		rm ${PRESEED}
-		apt-get -o Dpkg::Options::="--force-confnew" -y dist-upgrade || echo "Upgrade failed" && exit
+		apt-get -o Dpkg::Options::="--force-confnew" -y dist-upgrade
+		if [ $? != 0 ]; then exit; fi
 		apt-get -y autoremove
 
 	## Configure swapfile ##
