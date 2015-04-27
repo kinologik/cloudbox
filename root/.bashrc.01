@@ -24,6 +24,10 @@ if [ $(tty) == /dev/tty1 ]; then
     echo "/swapfile none swap sw 0 0" >> /etc/fstab
     sysctl -w vm.swappiness=30
 
+	## SSH port settings ##
+		curl -o /etc/ssh/sshd_config ${CBURL}/etc/ssh/sshd_config
+		sed -i 's|{{port}}|'${SSHPORT}'|g' /etc/ssh/sshd_config
+
   ## Set hostname, timezone && locale ##
     echo -e ${HNAME} > /etc/hostname
     echo ${TZONE} > /etc/timezone
