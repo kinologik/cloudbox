@@ -1,5 +1,7 @@
 deb http://http.debian.net/debian/ jessie main contrib non-free
 deb-src http://http.debian.net/debian/ jessie main contrib non-free
+	deb http://http.debian.net/debian/ experimental main contrib non-free
+	deb-src http://http.debian.net/debian/ experimental main contrib non-free
 
 deb http://http.debian.net/debian/ jessie-updates main contrib non-free
 deb-src http://http.debian.net/debian/ jessie-updates main contrib non-free
