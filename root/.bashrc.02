@@ -22,7 +22,10 @@ if [ $(tty) == /dev/tty1 ]; then
 		curl -o ${HOME}/.config/openbox/rc.xml ${CBURL}/root/.config/openbox/rc.xml
 		sed -i 's|{{port}}|'${VNCPORT}'|g' ${HOME}/.config/openbox/autostart
 
-	## Fonts, Icons && Theme ##
+	## Fonts, Icons, Themes && Wallpapers ##
+		apt-get -y install gtk2-engines gtk-chtheme
+		apt-get -y install hsetroot nitrogen
+		
 		# Fonts
 			# Oxygen
 				curl https://dl.dropboxusercontent.com/s/ixzd0g4qy19wnya/font.oxygen.tar.gz | tar -zxvf - -C ${HOME}
@@ -42,6 +45,18 @@ if [ $(tty) == /dev/tty1 ]; then
 			# Ardis
 				## svg icons -- won't work with Wbar atm ##
 				# git clone https://github.com/KotusWorks/Ardis-icon-theme.git ${HOME}/.icons/Ardis-icon-theme
+				
+		# Themes
+			# Numix
+				curl -o ${HOME}/.gtkrc.mine ${CBURL}/root/.gtkrc.mine
+				curl -o ${HOME}/.gtkrc-2.0 ${CBURL}/root/.gtkrc-2.0
+				curl --create-dirs -o ${HOME}/.config/gtk-3.0/settings.ini ${CBURL}/root/.config/gtk-3.0/settings.ini
+				
+		# Wallpapers
+			# Custom
+				curl https://dl.dropboxusercontent.com/s/ru883uwrnh98y7d/wallpapers.tar.gz | tar -zxvf - -C ${HOME}
+				curl --create-dirs -o ${HOME}/.config/nitrogen/nitrogen.cfg ${CBURL}/root/.config/nitrogen/nitrogen.cfg
+				curl -o ${HOME}/.config/nitrogen/bg-saved.cfg ${CBURL}/root/.config/nitrogen/bg-saved.cfg	
 
 	## Compositor ##
 		apt-get -y install compton
@@ -87,19 +102,6 @@ if [ $(tty) == /dev/tty1 ]; then
 		apt-get -y install geany
 		curl --create-dirs -o ${HOME}/.config/geany/colorschemes/zenburn.conf ${CBURL}/root/.config/geany/colorschemes/zenburn.conf
 		curl -o ${HOME}/.config/geany/geany.conf ${CBURL}/root/.config/geany/geany.conf
-
-	## Wallpapers ##
-		apt-get -y install hsetroot nitrogen
-		curl https://dl.dropboxusercontent.com/s/ru883uwrnh98y7d/wallpapers.tar.gz | tar -zxvf - -C ${HOME}
-		curl --create-dirs -o ${HOME}/.config/nitrogen/nitrogen.cfg ${CBURL}/root/.config/nitrogen/nitrogen.cfg
-		curl -o ${HOME}/.config/nitrogen/bg-saved.cfg ${CBURL}/root/.config/nitrogen/bg-saved.cfg
-
-	## Desktop Theme ##
-		apt-get -y install gtk2-engines gtk-chtheme
-		apt-get -y install numix-gtk-theme
-		# curl -o ${HOME}/.gtkrc.mine ${CBURL}/root/.gtkrc.mine
-		curl -o ${HOME}/.gtkrc-2.0 ${CBURL}/root/.gtkrc-2.0
-		url --create-dirs -o ${HOME}/.config/gtk-3.0/settings.ini ${CBURL}/root/.config/gtk-3.0/settings.ini
 
 	## Load final script && REBOOT ##
 		curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc
