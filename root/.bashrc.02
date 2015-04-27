@@ -25,6 +25,7 @@ if [ $(tty) == /dev/tty1 ]; then
 	## Fonts, Icons, Themes && Wallpapers ##
 		apt-get -y install gtk2-engines gtk-chtheme
 		apt-get -y install hsetroot nitrogen
+		mkdir ${HOME}/.icons
 		
 		# Fonts
 			# Oxygen
@@ -36,12 +37,17 @@ if [ $(tty) == /dev/tty1 ]; then
 				apt-get update
 				apt-get -y install pacifica-icon-theme
 				ln -s /usr/share/icons/Pacifica ${HOME}/.icons/Pacifica
+				ln -s /usr/share/icons/Pacifica-U ${HOME}/.icons/Pacifica-U
 			
 			# Numix
 				apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0F164EEB
 				curl -o /etc/apt/sources.list.d/numix.list ${CBURL}/etc/apt/sources.list.d/numix.list
 				apt-get update
 				apt-get -y install numix-icon-theme numix-icon-theme-circle
+				ln -s /usr/share/icons/Numix ${HOME}/.icons/Numix
+				ln -s /usr/share/icons/Numix-Light ${HOME}/.icons/Numix-Light
+				ln -s /usr/share/icons/Numix-Circle ${HOME}/.icons/Numix-Circle
+				ln -s /usr/share/icons/Numix-Circle-Light ${HOME}/.icons/Numix-Circle-Light
 			
 			# Ardis
 				## svg icons -- won't work with Wbar atm ##
