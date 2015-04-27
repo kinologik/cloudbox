@@ -28,16 +28,16 @@ if [ $(tty) == /dev/tty1 ]; then
 			curl https://dl.dropboxusercontent.com/s/ixzd0g4qy19wnya/font.oxygen.tar.gz | tar -zxvf - -C ${HOME}
 		# Icons
 			# Pacifica
-			apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 87DD42B5
-			curl -o /etc/apt/sources.list.d/pacifica.list ${CBURL}/etc/apt/sources.list.d/pacifica.list
-			apt-get update
-			apt-get -y install pacifica-icon-theme
+			# apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 87DD42B5
+			# curl -o /etc/apt/sources.list.d/pacifica.list ${CBURL}/etc/apt/sources.list.d/pacifica.list
+			# apt-get update
+			# apt-get -y install pacifica-icon-theme
 			
 			# Numix
-			apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0F164EEB
-			curl -o /etc/apt/sources.list.d/numix.list ${CBURL}/etc/apt/sources.list.d/numix.list
-			apt-get update
-			apt-get -y install numix-icon-theme
+			# apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0F164EEB
+			# curl -o /etc/apt/sources.list.d/numix.list ${CBURL}/etc/apt/sources.list.d/numix.list
+			# apt-get update
+			# apt-get -y install numix-icon-theme
 			
 			# Ardis
 			git clone https://github.com/KotusWorks/Ardis-icon-theme.git ${HOME}/.icons/Ardis-icon-theme
