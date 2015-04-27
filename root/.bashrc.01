@@ -5,6 +5,7 @@ if [ $(tty) == /dev/tty1 ]; then
 	## Update Debian source files ##
 		curl -o /etc/apt/sources.list ${CBURL}/etc/apt/sources.${OSDIST}.list
 		apt-get update || echo "Update failed" && exit
+		if [ $? != 0 ]; then exit; fi
 
 	## Unattended Debian update/upgrade ##
 		curl -o /etc/apt/listchanges.conf ${CBURL}/etc/apt/listchanges.conf
