@@ -8,7 +8,8 @@ if [ $(tty) == /dev/tty1 ]; then
 
 	## Unattended Debian update/upgrade ##
 		curl -o /etc/apt/listchanges.conf ${CBURL}/etc/apt/listchanges.conf
-		 apt-get -y install debconf-utils
+		PRESEED=${HOME}'/preseed.cfg'
+		apt-get -y install debconf-utils
 		curl -o ${PRESEED} ${CBURL}/root/preseed.cfg
 		debconf-set-selections --verbose < ${PRESEED}
 		rm ${PRESEED}
