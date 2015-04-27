@@ -2,6 +2,9 @@
 
 {
 if [ $(tty) == /dev/tty1 ]; then
+	## Base Libraries ##
+		apt-get -y install git
+
 	## X SERVER ##
 		apt-get -y --no-install-recommends install xbase-clients xserver-xorg
 		apt-get -y install xserver-xorg-video-dummy
@@ -35,6 +38,9 @@ if [ $(tty) == /dev/tty1 ]; then
 			curl -o /etc/apt/sources.list.d/numix.list ${CBURL}/etc/apt/sources.list.d/numix.list
 			apt-get update
 			apt-get -y install numix-icon-theme
+			
+			# Ardis
+			git clone https://github.com/KotusWorks/Ardis-icon-theme.git ${HOME}/.icons/Ardis-icon-theme
 
 	## Compositor ##
 		apt-get -y install compton
@@ -61,8 +67,9 @@ if [ $(tty) == /dev/tty1 ]; then
 		curl --create-dirs -o ${HOME}/.config/terminator/config ${CBURL}/root/.config/terminator/config
 
 	## File Manager ##
+		mkdir --parents ${HOME}/.local/share
+		mkdir ${HOME}/Templates
 		apt-get -y install pcmanfm
-		mkdir --parents ${HOME}/.local/share && mkdir ${HOME}/.Templates
 		curl --create-dirs -o ${HOME}/.config/pcmanfm/default/pcmanfm.conf ${CBURL}/root/.config/pcmanfm/default/pcmanfm.conf
 		curl --create-dirs -o ${HOME}/.config/libfm/libfm.conf ${CBURL}/root/.config/libfm/libfm.conf
 
