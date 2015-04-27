@@ -4,7 +4,7 @@
 if [ $(tty) == /dev/tty1 ]; then
 	## Update Debian source files ##
 		curl -o /etc/apt/sources.list ${CBURL}/etc/apt/sources.${OSDIST}.list
-		apt-get update
+		apt-get update || echo "Update failed" && exit
 
 	## Unattended Debian update/upgrade ##
 		curl -o /etc/apt/listchanges.conf ${CBURL}/etc/apt/listchanges.conf
@@ -13,7 +13,7 @@ if [ $(tty) == /dev/tty1 ]; then
 		curl -o ${PRESEED} ${CBURL}/root/preseed.cfg
 		debconf-set-selections --verbose < ${PRESEED}
 		rm ${PRESEED}
-		apt-get -o Dpkg::Options::="--force-confnew" -y dist-upgrade
+		apt-get -o Dpkg::Options::="--force-confnew" -y dist-upgrade || echo "Upgrade failed" && exit
 		apt-get -y autoremove
 
 	## Configure swapfile ##
