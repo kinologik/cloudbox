@@ -8,4 +8,5 @@ widget_class "*" style "user-font"
 
 gtk-font-name="Oxygen-Sans 10"
 
-include "/root/.gtkrc.mine"
+# include "/root/.gtkrc.mine"
+gtk-icon-theme-name="Numix-uTouch"
