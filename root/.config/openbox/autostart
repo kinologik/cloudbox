@@ -10,4 +10,4 @@ conky -q -c ~/.config/conky/.conkyrc &
 
 (sleep 5 && wbar) &
 
-x11vnc -localhost -bg -forever -shared -noxdamage -nolookup -rfbport 5900 -logfile /var/log/x11vnc.log -repeat -display :0
+x11vnc -localhost -bg -forever -shared -noxdamage -nolookup -rfbport {{port}} -logfile /var/log/x11vnc.log -repeat -display :0
