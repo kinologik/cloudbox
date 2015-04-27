@@ -8,6 +8,7 @@ tint2 2>&1 > /var/log/tint2.log &
 
 conky -q -c ~/.config/conky/.conkyrc &
 
-(sleep 5 && wbar) &
+## (sleep 5 && wbar) &
+(sleep 5 && plank) &
 
 x11vnc -localhost -bg -forever -shared -noxdamage -nolookup -rfbport {{port}} -logfile /var/log/x11vnc.log -repeat -display :0
