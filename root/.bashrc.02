@@ -36,10 +36,12 @@ if [ $(tty) == /dev/tty1 ]; then
 		curl --create-dirs -o ${HOME}/.config/tint2/tint2rc ${CBURL}/root/.config/tint2/tint2rc
 
 	## Launcher ##
-		apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9E5DB0C8
-		curl -o /etc/apt/sources.list.d/plank.list ${CBURL}/etc/apt/sources.list.d/plank.list
-		apt-get update
-		apt-get -y install plank
+		apt-get -y install wbar wbar-config
+		apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 87DD42B5
+		curl -o /etc/apt/sources.list.d/pacifica.list ${CBURL}/etc/apt/sources.list.d/pacifica.list
+		apt-get update && apt-get -y install pacifica-icon-theme
+		curl https://dl.dropboxusercontent.com/s/ixzd0g4qy19wnya/font.oxygen.tar.gz | tar -zxvf - -C ${HOME}
+		curl -o ${HOME}/.wbar ${CBURL}/root/.wbar
 
 	## Wallpapers ##
 		apt-get -y install hsetroot nitrogen
