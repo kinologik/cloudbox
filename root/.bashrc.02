@@ -41,11 +41,11 @@ if [ $(tty) == /dev/tty1 ]; then
 				apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0F164EEB
 				curl -o /etc/apt/sources.list.d/numix.list ${CBURL}/etc/apt/sources.list.d/numix.list
 				apt-get update
-				apt-get -y install numix-icon-theme
+				apt-get -y install numix-icon-theme numix-icon-theme-circle
 			
 			# Ardis
 				## svg icons -- won't work with Wbar atm ##
-				# git clone https://github.com/KotusWorks/Ardis-icon-theme.git ${HOME}/.icons/Ardis-icon-theme
+				git clone https://github.com/KotusWorks/Ardis-icon-theme.git ${HOME}/.icons/Ardis-icon-theme
 				
 		# Themes
 			# Numix
