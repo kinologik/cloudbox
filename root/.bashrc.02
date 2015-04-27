@@ -19,6 +19,23 @@ if [ $(tty) == /dev/tty1 ]; then
 		curl -o ${HOME}/.config/openbox/rc.xml ${CBURL}/root/.config/openbox/rc.xml
 		sed -i 's|{{port}}|'${VNCPORT}'|g' ${HOME}/.config/openbox/autostart
 
+	## Fonts, Icons && Theme ##
+		# Fonts
+			# Oxygen
+			curl https://dl.dropboxusercontent.com/s/ixzd0g4qy19wnya/font.oxygen.tar.gz | tar -zxvf - -C ${HOME}
+		# Icons
+			# Pacifica
+			apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 87DD42B5
+			curl -o /etc/apt/sources.list.d/pacifica.list ${CBURL}/etc/apt/sources.list.d/pacifica.list
+			apt-get update
+			apt-get -y install pacifica-icon-theme
+			
+			# Numix
+			apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0F164EEB
+			curl -o /etc/apt/sources.list.d/numix.list ${CBURL}/etc/apt/sources.list.d/numix.list
+			apt-get update
+			apt-get -y install numix-icon-theme
+
 	## Compositor ##
 		apt-get -y install compton
 		curl -o ${HOME}/.config/compton.conf ${CBURL}/root/.config/compton.conf
@@ -37,18 +54,8 @@ if [ $(tty) == /dev/tty1 ]; then
 
 	## Launcher ##
 		apt-get -y install wbar wbar-config
-		apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 87DD42B5
-		curl -o /etc/apt/sources.list.d/pacifica.list ${CBURL}/etc/apt/sources.list.d/pacifica.list
-		apt-get update && apt-get -y install pacifica-icon-theme
-		curl https://dl.dropboxusercontent.com/s/ixzd0g4qy19wnya/font.oxygen.tar.gz | tar -zxvf - -C ${HOME}
 		curl -o ${HOME}/.wbar ${CBURL}/root/.wbar
 
-	## Wallpapers ##
-		apt-get -y install hsetroot nitrogen
-		curl https://dl.dropboxusercontent.com/s/ru883uwrnh98y7d/wallpapers.tar.gz | tar -zxvf - -C ${HOME}
-		curl --create-dirs -o ${HOME}/.config/nitrogen/nitrogen.cfg ${CBURL}/root/.config/nitrogen/nitrogen.cfg
-		curl -o ${HOME}/.config/nitrogen/bg-saved.cfg ${CBURL}/root/.config/nitrogen/bg-saved.cfg
-    
 	## Terminal ##
 		apt-get -y install terminator
 		curl --create-dirs -o ${HOME}/.config/terminator/config ${CBURL}/root/.config/terminator/config
@@ -64,13 +71,16 @@ if [ $(tty) == /dev/tty1 ]; then
 		curl --create-dirs -o ${HOME}/.config/geany/colorschemes/zenburn.conf ${CBURL}/root/.config/geany/colorschemes/zenburn.conf
 		curl -o ${HOME}/.config/geany/geany.conf ${CBURL}/root/.config/geany/geany.conf
 
+	## Wallpapers ##
+		apt-get -y install hsetroot nitrogen
+		curl https://dl.dropboxusercontent.com/s/ru883uwrnh98y7d/wallpapers.tar.gz | tar -zxvf - -C ${HOME}
+		curl --create-dirs -o ${HOME}/.config/nitrogen/nitrogen.cfg ${CBURL}/root/.config/nitrogen/nitrogen.cfg
+		curl -o ${HOME}/.config/nitrogen/bg-saved.cfg ${CBURL}/root/.config/nitrogen/bg-saved.cfg
+
 	## Desktop Theme ##
 		apt-get -y install gtk2-engines gtk-chtheme
-		apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 0F164EEB
-		curl -o /etc/apt/sources.list.d/numix.list ${CBURL}/etc/apt/sources.list.d/numix.list
-		apt-get update
-		apt-get -y install numix-gtk-theme numix-icon-theme
-		curl -o ${HOME}/.gtkrc.mine ${CBURL}/root/.gtkrc.mine
+		apt-get -y install numix-gtk-theme
+		# curl -o ${HOME}/.gtkrc.mine ${CBURL}/root/.gtkrc.mine
 		curl -o ${HOME}/.gtkrc-2.0 ${CBURL}/root/.gtkrc-2.0
 		url --create-dirs -o ${HOME}/.config/gtk-3.0/settings.ini ${CBURL}/root/.config/gtk-3.0/settings.ini
 
