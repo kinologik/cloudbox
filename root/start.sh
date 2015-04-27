@@ -12,6 +12,7 @@ TTYLOGIN='/etc/systemd/system/getty@tty1.service.d/autologin.conf'
 curl --create-dirs -o ${TTYLOGIN} ${CBURL}$(echo ${TTYLOGIN} | sed 's|@|-|g')
 
 curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.01
+rm ${HOME}/init.sh
 reboot
 
 exit
