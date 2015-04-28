@@ -29,7 +29,7 @@ if [ $(tty) == /dev/tty1 ]; then
 		apt-get -y autoremove
 
 	## Configure swapfile ##
-		# create_swapfile
+		create_swapfile
 
 	## SSH port settings ##
 			backup /etc/ssh/sshd_config
