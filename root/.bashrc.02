@@ -34,12 +34,10 @@ if [ $(tty) == /dev/tty1 ]; then
 		apt-get -y install git
 
 	## X SERVER ##
-		echo '## X SERVER ##' >> ${HOME}/.install.log
-		install_xserver 2>&1 ${HOME}/.install.log
+		install_xserver
 
 	## REMOTE DESKTOP && OPENBOX ##
-		echo '## REMOTE DESKTOP && OPENBOX ##' >> ${HOME}/.install.log
-		install_openbox 2>&1 ${HOME}/.install.log
+		install_openbox
 
 	## Fonts, Icons, Themes && Wallpapers ##
 		# Fonts
@@ -140,7 +138,8 @@ if [ $(tty) == /dev/tty1 ]; then
 		curl -o ${HOME}/.config/geany/geany.conf ${CBURL}/root/.config/geany/geany.conf
 
 	## Load final script && REBOOT ##
+		cat /dev/null > /var/log/syslog
 		curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc
-		# reboot
+		reboot
 fi
 
