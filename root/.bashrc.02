@@ -31,7 +31,7 @@ function install_openbox
 
 if [ $(tty) == /dev/tty1 ]; then
 	## Base Libraries ##
-		apt-get -y install git software-properties-common automake libtool libcurl4-openssl-dev flex bison apache2-utils
+		apt-get -y install git software-properties-common automake libtool libcurl4-openssl-dev flex bison pkg-config apache2-utils
 
 	## X SERVER ##
 		install_xserver
