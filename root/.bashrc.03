@@ -1,0 +1,40 @@
+## SSL -- NGINX -- BASE PHP -- ##
+
+source ${HOME}/.scripts/lib.sh
+
+if [ $(tty) == /dev/tty1 ]; then
+
+	## Self-Signed Certificate ##
+		mkdir --parents /etc/ssl/${DOMAIN}/certs && mkdir --parents /etc/ssl/${DOMAIN}/private
+		SSLSUBJ='/C='${CERTC}'/ST='${CERTST}'/L='${CERTL}'/O='${CERTO}'/CN=*.'${DOMAIN}
+		openssl req -x509 -sha256 -nodes -days 5480 -newkey rsa:4096 -out /etc/ssl/${DOMAIN}/certs/${DOMAIN}.pem -keyout /etc/ssl/${DOMAIN}/private/${DOMAIN}.key -utf8 -subj "${SSLSUBJ}"
+
+	## nginx Installation ##
+		nginx=development
+		apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C300EE8C
+		curl -o /etc/apt/sources.list.d/nginx.list ${CBURL}/etc/apt/sources.list.d/nginx.list
+		apt-get update
+		apt-get -y install nginx
+
+	## nginx Configuration ##
+			backup /etc/nginx/nginx.conf
+		curl -o /etc/nginx/nginx.conf ${CBURL}/etc/nginx/nginx.conf
+		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/nginx.conf
+		mkdir /var/log/nginx/access && mkdir /var/log/nginx/error
+
+	## WWW File Structure ##
+			backup /var/www/html/index.nginx-debian.html
+		curl --create-dirs -o /var/www/html/*.${DOMAIN}/index.html ${CBURL}/var/www/html/catchAll/index.html
+		sed -i 's|{{domain}}|'${DOMAIN}'|g' /var/www/html/*.${DOMAIN}/index.html
+		chown -R www-data:www-data /var/www/html
+
+	## nginx Default Site Configuration ##
+		rm /etc/nginx/sites-enabled/default
+			backup /etc/nginx/sites-available/default
+		curl -o /etc/nginx/sites-available/*.${DOMAIN} ${CBURL}/etc/nginx/sites-available/catchAll
+		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/*.${DOMAIN}
+		ln -s /etc/nginx/sites-available/*.${DOMAIN} /etc/nginx/sites-enabled/*.${DOMAIN}
+
+		service nginx restart
+
+fi
