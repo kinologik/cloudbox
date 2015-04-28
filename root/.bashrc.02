@@ -90,7 +90,7 @@ if [ $(tty) == /dev/tty1 ]; then
 			# mv /etc/xdg/autostart/wbar.desktop /etc/xdg/autostart/wbar.desktop.backup
 		
 		# Plank
-			apt-get -t experimental install plank
+			apt-get -y -t experimental install plank
 			# apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 9E5DB0C8
 			# curl -o /etc/apt/sources.list.d/plank.list ${CBURL}/etc/apt/sources.list.d/plank.list
 			# apt-get update
