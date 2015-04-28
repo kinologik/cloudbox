@@ -1,2 +1,2 @@
 [PlankItemsDockItemPreferences]
-Launcher=file:////root/.config/plank/dock1/launchers/terminal.desktop
+Launcher=file:///{{home}}/.config/plank/dock1/launchers/terminal.desktop
