@@ -12,11 +12,15 @@ backup() {
     	mv ${1} ${BCKUP}${1}
 }
 
-apt-get -y install debconf-utils &> /dev/null
-wget -P ${HOME} ${CBURL}/root/preseed.cfg
-debconf-set-selections --verbose < ${PRESEED}
-dpkg-reconfigure locales
+# apt-get -y install debconf-utils &> /dev/null
+# wget -P ${HOME} ${CBURL}/root/preseed.cfg
+# debconf-set-selections --verbose < ${PRESEED}
+# dpkg-reconfigure locales
 
+backup /etc/locale.gen
+wget -P /etc ${CBURL}/etc/locale.gen
+locale-gen
+# echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
 apt-get -y install curl
 ln -s /etc/environment ${HOME}/.ssh/environment
 
