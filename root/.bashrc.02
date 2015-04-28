@@ -1,39 +1,47 @@
 ## X SERVER -- REMOTE DESKTOP -- OPENBOX -- BASIC APPLICATIONS ##
 
 source ${HOME}/.scripts/lib.sh
-mount -o remount,rw /
+
+function install_xserver
+{
+	apt-get -y --no-install-recommends install xbase-clients xserver-xorg
+	apt-get -y install xserver-xorg-video-dummy
+	apt-get -y install xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic
+		backup /etc/X11/xorg.conf
+	curl -o /etc/X11/xorg.conf ${CBURL}/etc/X11/xorg.conf
+}
+
+function install_openbox
+{
+	apt-get -y install libpam-gnome-keyring openbox menu obmenu x11vnc gtk2-engines gtk-chtheme hsetroot nitrogen
+	curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc
+		backup ${HOME}/.xinitrc
+	curl -o ${HOME}/.xinitrc ${CBURL}/root/.xinitrc
+	curl --create-dirs -o ${HOME}/.scripts/emptyTrash.sh ${CBURL}/root/.scripts/emptyTrash.sh
+	chmod +x ${HOME}/.scripts/emptyTrash.sh
+		backup ${HOME}/.config/openbox/autostart
+	curl --create-dirs -o ${HOME}/.config/openbox/autostart ${CBURL}/root/.config/openbox/autostart
+		backup ${HOME}/.config/openbox/menu.xml
+	curl -o ${HOME}/.config/openbox/menu.xml ${CBURL}/root/.config/openbox/menu.xml
+		backup ${HOME}/.config/openbox/rc.xml
+	curl -o ${HOME}/.config/openbox/rc.xml ${CBURL}/root/.config/openbox/rc.xml
+	sed -i 's|{{port}}|'${VNCPORT}'|g' ${HOME}/.config/openbox/autostart
+	mkdir ${HOME}/.icons
+}
 
 if [ $(tty) == /dev/tty1 ]; then
 	## Base Libraries ##
 		apt-get -y install git
 
 	## X SERVER ##
-		apt-get -y --no-install-recommends install xbase-clients xserver-xorg
-		apt-get -y install xserver-xorg-video-dummy
-		apt-get -y install xfonts-100dpi xfonts-75dpi xfonts-scalable xfonts-cyrillic
-			backup /etc/X11/xorg.conf
-		curl -o /etc/X11/xorg.conf ${CBURL}/etc/X11/xorg.conf
+		echo '## X SERVER ##' >> ${HOME}/.install.log
+		install_xserver 2>&1 ${HOME}/.install.log
 
 	## REMOTE DESKTOP && OPENBOX ##
-		apt-get -y install libpam-gnome-keyring openbox menu obmenu x11vnc
-		curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc
-			backup ${HOME}/.xinitrc
-		curl -o ${HOME}/.xinitrc ${CBURL}/root/.xinitrc
-		curl --create-dirs -o ${HOME}/.scripts/emptyTrash.sh ${CBURL}/root/.scripts/emptyTrash.sh
-		chmod +x ${HOME}/.scripts/emptyTrash.sh
-			backup ${HOME}/.config/openbox/autostart
-		curl --create-dirs -o ${HOME}/.config/openbox/autostart ${CBURL}/root/.config/openbox/autostart
-			backup ${HOME}/.config/openbox/menu.xml
-		curl -o ${HOME}/.config/openbox/menu.xml ${CBURL}/root/.config/openbox/menu.xml
-			backup ${HOME}/.config/openbox/rc.xml
-		curl -o ${HOME}/.config/openbox/rc.xml ${CBURL}/root/.config/openbox/rc.xml
-		sed -i 's|{{port}}|'${VNCPORT}'|g' ${HOME}/.config/openbox/autostart
+		echo '## REMOTE DESKTOP && OPENBOX ##' >> ${HOME}/.install.log
+		install_openbox 2>&1 ${HOME}/.install.log
 
 	## Fonts, Icons, Themes && Wallpapers ##
-		apt-get -y install gtk2-engines gtk-chtheme
-		apt-get -y install hsetroot nitrogen
-		mkdir ${HOME}/.icons
-		
 		# Fonts
 			# Oxygen
 				curl https://dl.dropboxusercontent.com/s/ixzd0g4qy19wnya/font.oxygen.tar.gz | tar -zxvf - -C ${HOME}
