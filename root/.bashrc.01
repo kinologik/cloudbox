@@ -1,6 +1,5 @@
 ## OS UPDATE/UPGRADE, SWAPFILE, HOSTNAME + TIMEZONE + LOCALES SETTINGS && DELETE HISTORY ##
 
-{
 source ${HOME}/.scripts/lib.sh
 
 if [ $(tty) == /dev/tty1 ]; then
@@ -45,5 +44,3 @@ if [ $(tty) == /dev/tty1 ]; then
 	## REBOOT ##
 		# reboot
 fi
-exit
-}
