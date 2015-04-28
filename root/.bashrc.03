@@ -37,4 +37,23 @@ if [ $(tty) == /dev/tty1 ]; then
 
 		service nginx restart
 
+	## PHP-FPM Installation ##
+		apt-get -y install php5-fpm
+			backup /etc/php5/fpm/php.ini
+		sed -i 's|.*cgi.fix_pathinfo=.*|cgi.fix_pathinfo=1|g' /etc/php5/fpm/php.ini
+			backup /etc/php5/fpm/pool.d/www.conf
+		mkdir /var/run/php5-fpm
+		
+	## PHP Info Configuration ##
+		curl -o /etc/php5/fpm/pool.d/php.${DOMAIN}.conf ${CBURL}/etc/php5/fpm/pool.d/php.conf
+		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/php5/fpm/pool.d/php.${DOMAIN}.conf
+		
+		curl --create-dirs -o /var/www/html/php.${DOMAIN}/index.php ${CBURL}/var/www/html/php/index.php
+		chown -R www-data:www-data /var/www/html
+		
+		curl -o /etc/nginx/sites-available/php.${DOMAIN} ${CBURL}/etc/nginx/sites-available/php
+		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/php.${DOMAIN}
+		ln -s /etc/nginx/sites-available/php.${DOMAIN} /etc/nginx/sites-enabled/php.${DOMAIN}
+
+		service php5-fpm restart && service nginx restart
 fi
