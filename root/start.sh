@@ -11,7 +11,10 @@ backup() {
     	mv ${1} ${BCKUP}${1}
 }
 
-curl -o /etc/default/locale ${CBURL}/etc/default/locale
+# curl -o /etc/default/locale ${CBURL}/etc/default/locale
+export LANGUAGE=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 apt-get -y install curl
 
 # mkdir --parents ${BCKUP}'/'{home,etc,var/{www/html/{localhost,*},run}}
