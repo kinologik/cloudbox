@@ -6,11 +6,11 @@ function create_swapfile
 {
 	touch /swapfile
 	chmod 600 /swapfile
-	dd if=/dev/zero of=/swapfile bs=1024k count=2048
+	dd if=/dev/zero of=/swapfile bs=1M count=1024
 	mkswap /swapfile
 	swapon /swapfile
-		backup /etc/fstab
-	echo "/swapfile none swap sw 0 0" >> /etc/fstab
+		copy /etc/fstab
+	echo '/swapfile none swap sw 0 0' >> /etc/fstab
 	sysctl -w vm.swappiness=30
 }
 
