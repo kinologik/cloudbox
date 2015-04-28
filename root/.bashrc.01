@@ -6,7 +6,7 @@ function create_swapfile
 {
 	touch /swapfile
 	chmod 600 /swapfile
-	dd if=/dev/zero of=/swapfile bs=1M count=1024
+	dd if=/dev/zero of=/swapfile bs=1M count=2048
 	mkswap /swapfile
 	swapon /swapfile
 		copy /etc/fstab
