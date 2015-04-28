@@ -69,8 +69,6 @@ if [ $(tty) == /dev/tty1 ]; then
 		# Themes
 			# Numix
 				apt-get -y install numix-gtk-theme
-					backup ${HOME}/.gtkrc.mine
-				curl -o ${HOME}/.gtkrc.mine ${CBURL}/root/.gtkrc.mine
 					backup ${HOME}/.gtkrc-2.0
 				curl -o ${HOME}/.gtkrc-2.0 ${CBURL}/root/.gtkrc-2.0
 					backup ${HOME}/.config/gtk-3.0/settings.ini
