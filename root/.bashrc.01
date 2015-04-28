@@ -1,6 +1,8 @@
 ## OS UPDATE/UPGRADE, SWAPFILE, HOSTNAME + TIMEZONE + LOCALES SETTINGS && DELETE HISTORY ##
 
 {
+source ${HOME}/.scripts/lib.sh
+
 if [ $(tty) == /dev/tty1 ]; then
 	## Update Debian source files ##
 		backup /etc/apt/sources.list
@@ -41,7 +43,7 @@ if [ $(tty) == /dev/tty1 ]; then
 		curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.02
     
 	## REBOOT ##
-		reboot
+		# reboot
 fi
 exit
 }
