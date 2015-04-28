@@ -1,0 +1,10 @@
+## How to handle systemd detection
+
+SYSTEMD=$(pidof systemd)
+
+if [[ -z ${SYSTEMD} ]]; then
+	mv /etc/inittab ${BCKUP}/etc/inittab
+	backup /etc/inittab
+	curl -o /etc/inittab ${CBURL}/etc/inittab
+	if [ $? != 0 ]; then echo "inittab download failed..."; exit; fi
+fi
