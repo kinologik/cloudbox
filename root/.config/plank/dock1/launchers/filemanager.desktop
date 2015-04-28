@@ -1,5 +1,5 @@
 [Desktop Entry]
 Name=file manager
 Exec=pcmanfm
-Icon=/root/.icons/Ardis-icon-theme/scalable/apps/system-file-manager.svg
+Icon={{home}}/.icons/Ardis-icon-theme/scalable/apps/system-file-manager.svg
 Type=Application
