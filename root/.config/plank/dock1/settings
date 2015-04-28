@@ -1,0 +1,17 @@
+[PlankDockPreferences]
+CurrentWorkspaceOnly=false
+IconSize=48
+HideMode=1
+UnhideDelay=0
+HideDelay=0
+Monitor=
+DockItems=filemanager.dockitem;;terminal.dockitem;;editor.dockitem;;plank.dockitem
+Position=3
+Offset=0
+Theme=Cloudbox
+Alignment=3
+ItemsAlignment=3
+LockItems=true
+PressureReveal=false
+PinnedOnly=true
+AutoPinning=false
