@@ -19,12 +19,13 @@ ln -s /etc/environment ${HOME}/.ssh/environment
 
 SYSTEMD=$(pidof systemd)
 
-if [[ -z ${SYSTEMD} ]]; then
+########### IRRELEVANT SINCE JESSIE IS STABLE ####################
+# if [[ -z ${SYSTEMD} ]]; then
 		# mv /etc/inittab ${BCKUP}/etc/inittab
-	backup /etc/inittab
+#	backup /etc/inittab
 	# curl -o /etc/inittab ${CBURL}/etc/inittab
-	if [ $? != 0 ]; then echo "inittab download failed..."; exit; fi
-fi
+#	if [ $? != 0 ]; then echo "inittab download failed..."; exit; fi
+#fi
 
 TTYLOGIN='/etc/systemd/system/getty@tty1.service.d/autologin.conf'
 curl --create-dirs -o ${TTYLOGIN} ${CBURL}$(echo ${TTYLOGIN} | sed 's|@|-|g')
