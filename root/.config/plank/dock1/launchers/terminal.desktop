@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=terminal
+Exec=terminator
+Icon=/root/.icons/Ardis-icon-theme/scalable/apps/terminal.svg
+Type=Application
