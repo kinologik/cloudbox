@@ -2,6 +2,7 @@
 
 {
 CBURL='https://raw.githubusercontent.com/kinologik/cloudbox/master'
+PRESEED=${HOME}'/preseed.cfg'
 BCKUP=${HOME}'/.backup'
 
 backup() {
@@ -11,7 +12,12 @@ backup() {
     	mv ${1} ${BCKUP}${1}
 }
 
-apt-get -y install curl &> /dev/null
+apt-get -y install debconf-utils &> /dev/null
+wget -P ${HOME} ${CBURL}/root/preseed.cfg
+debconf-set-selections --verbose < ${PRESEED}
+dpkg-reconfigure locales
+
+apt-get -y install curl
 ln -s /etc/environment ${HOME}/.ssh/environment
 
 TTYLOGIN='/etc/systemd/system/getty@tty1.service.d/autologin.conf'
