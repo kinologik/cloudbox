@@ -2,7 +2,7 @@
 
 {
 mkdir ${HOME}/.scripts
-wget -P ${HOME}/.scripts ${CBURL}/root/.scripts/lib.sh
+wget -P ${HOME}/.scripts https://raw.githubusercontent.com/kinologik/cloudbox/master/root/.scripts/lib.sh
 source ${HOME}/.scripts/lib.sh
 
 backup /etc/locale.gen
