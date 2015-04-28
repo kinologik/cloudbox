@@ -13,7 +13,9 @@ backup() {
     	mv ${1} ${BCKUP}${1}
 }
 
-mkdir --parents ${BCKUP}'/'{home,etc,var/{www/html/{localhost,*},run}}
+apt-get -y install curl
+
+# mkdir --parents ${BCKUP}'/'{home,etc,var/{www/html/{localhost,*},run}}
 ln -s /etc/environment ${HOME}/.ssh/environment
 
 SYSTEMD=$(pidof systemd)
