@@ -46,7 +46,7 @@ if [ $(tty) == /dev/tty1 ]; then
 			backup /etc/default/locale
 		curl -o /etc/default/locale ${CBURL}/etc/default/locale
 
-	## Delete bash history && load new script ##
+	## Delete bash history && load next installation script ##
 		cat /dev/null > ${HOME}/.bash_history
 		history -c
 		curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.test
