@@ -42,7 +42,6 @@ if [ $(tty) == /dev/tty1 ]; then
 			backup /etc/timezone
 		echo ${TZONE} > /etc/timezone
 			backup /etc/localtime
-		rm /etc/localtime
 		ln -s /usr/share/zoneinfo/${LTIME} /etc/localtime
 			backup /etc/default/locale
 		curl -o /etc/default/locale ${CBURL}/etc/default/locale
@@ -50,10 +49,8 @@ if [ $(tty) == /dev/tty1 ]; then
 	## Delete bash history && load new script ##
 		cat /dev/null > ${HOME}/.bash_history
 		history -c
-		# curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.test
-		
-			cat /dev/null > ${HOME}/.bashrc
-    
+		curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.test
+
 	## REBOOT ##
 		# reboot
 fi
