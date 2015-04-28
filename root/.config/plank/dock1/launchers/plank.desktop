@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=dock launcher
+Exec=plank
+Icon=/root/.icons/Ardis-icon-theme/scalable/apps/plank.svg
+Type=Application
+NoDisplay=false
