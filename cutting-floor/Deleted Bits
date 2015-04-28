@@ -8,3 +8,12 @@ if [[ -z ${SYSTEMD} ]]; then
 	curl -o /etc/inittab ${CBURL}/etc/inittab
 	if [ $? != 0 ]; then echo "inittab download failed..."; exit; fi
 fi
+
+######################
+# from start.sh
+
+# apt-get -y install debconf-utils &> /dev/null
+# wget -P ${HOME} ${CBURL}/root/preseed.cfg
+# debconf-set-selections --verbose < ${PRESEED}
+# dpkg-reconfigure locales
+######################
