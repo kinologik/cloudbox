@@ -1,0 +1,5 @@
+[Desktop Entry]
+Name=text editor
+Exec=geany
+Icon={{home}}/.icons/Ardis-icon-theme/scalable/apps/accessories-text-editor.svg
+Type=Application
