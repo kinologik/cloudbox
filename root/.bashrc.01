@@ -39,12 +39,16 @@ if [ $(tty) == /dev/tty1 ]; then
 	## Set hostname, timezone && locale ##
 			backup /etc/hostname
 		echo -e ${HNAME} > /etc/hostname
+		
 			backup /etc/timezone
 		echo ${TZONE} > /etc/timezone
 			backup /etc/localtime
 		ln -s /usr/share/zoneinfo/${LTIME} /etc/localtime
+		dpkg-reconfigure -f noninteractive tzdata
+		
 			backup /etc/default/locale
 		curl -o /etc/default/locale ${CBURL}/etc/default/locale
+		dpkg-reconfigure -f noninteractive locales
 
 	## Delete bash history && load next installation script ##
 		cat /dev/null > ${HOME}/.bash_history
