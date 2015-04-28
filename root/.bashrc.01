@@ -45,7 +45,8 @@ if [ $(tty) == /dev/tty1 ]; then
 	## Delete bash history && load new script ##
 		cat /dev/null > ${HOME}/.bash_history
 		history -c
-		curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.test
+		# curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.test
+		echo "" > ${HOME}/.bashrc
     
 	## REBOOT ##
 		reboot
