@@ -49,5 +49,5 @@ if [ $(tty) == /dev/tty1 ]; then
 		echo "" > ${HOME}/.bashrc
     
 	## REBOOT ##
-		reboot
+		# reboot
 fi
