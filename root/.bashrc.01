@@ -52,5 +52,6 @@ if [ $(tty) == /dev/tty1 ]; then
 		curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.test
 
 	## REBOOT ##
-		# reboot
+		cat /dev/null > /var/log/syslog
+		reboot
 fi
