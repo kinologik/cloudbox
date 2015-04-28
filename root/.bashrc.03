@@ -3,7 +3,6 @@
 source ${HOME}/.scripts/lib.sh
 
 if [ $(tty) == /dev/tty1 ]; then
-
 	## Self-Signed Certificate ##
 		mkdir --parents /etc/ssl/${DOMAIN}/certs && mkdir --parents /etc/ssl/${DOMAIN}/private
 		SSLSUBJ='/C='${CERTC}'/ST='${CERTST}'/L='${CERTL}'/O='${CERTO}'/CN=*.'${DOMAIN}
