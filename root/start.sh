@@ -11,19 +11,16 @@ backup() {
     	mv ${1} ${BCKUP}${1}
 }
 
-# curl -o /etc/default/locale ${CBURL}/etc/default/locale
-export LANGUAGE=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
-locale-gen en_US.UTF-8
-apt-get -y install curl
+apt-get -y install curl &> /dev/null
 
 # mkdir --parents ${BCKUP}'/'{home,etc,var/{www/html/{localhost,*},run}}
 ln -s /etc/environment ${HOME}/.ssh/environment
 
-SYSTEMD=$(pidof systemd)
-
 ########### IRRELEVANT SINCE JESSIE IS STABLE ####################
+# Still interesting on how to handle systemd detection
+
+# SYSTEMD=$(pidof systemd)
+
 # if [[ -z ${SYSTEMD} ]]; then
 		# mv /etc/inittab ${BCKUP}/etc/inittab
 #	backup /etc/inittab
