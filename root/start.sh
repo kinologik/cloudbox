@@ -1,26 +1,13 @@
 #!/bin/bash
 
 {
-CBURL='https://raw.githubusercontent.com/kinologik/cloudbox/master'
-# PRESEED=${HOME}'/preseed.cfg'
-BCKUP=${HOME}'/.backup'
-
-backup() {
-	BCKDIR=$(dirname ${1})
-	BCKFILE=$(basename ${1})
-	mkdir -p ${BCKUP}${BCKDIR}
-    	mv ${1} ${BCKUP}${1}
-}
-
-# apt-get -y install debconf-utils &> /dev/null
-# wget -P ${HOME} ${CBURL}/root/preseed.cfg
-# debconf-set-selections --verbose < ${PRESEED}
-# dpkg-reconfigure locales
+mkdir ${HOME}/.scripts
+wget -P ${HOME}/.scripts ${CBURL}/root/.scripts/lib.sh
+source ${HOME}/.scripts/lib.sh
 
 backup /etc/locale.gen
 wget -P /etc ${CBURL}/etc/locale.gen
 locale-gen
-# echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
 apt-get -y install curl
 ln -s /etc/environment ${HOME}/.ssh/environment
 
