@@ -21,7 +21,7 @@
 	curl --create-dirs -o ${TTYLOGIN} ${CBURL}$(echo ${TTYLOGIN} | sed 's|@|-|g')
 	if [ $? != 0 ]; then echo "systemd autologin download failed..."; exit; fi
 
-## Set new .bashrc script to continue installation after reboot && delete this script
+## Load next installation script && delete this script
 	backup ${HOME}/.bashrc
 	curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.01
 	if [ $? != 0 ]; then echo ".bashrc download failed..."; exit; fi
