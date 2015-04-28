@@ -2,6 +2,18 @@
 
 source ${HOME}/.scripts/lib.sh
 
+function create_swapfile
+{
+	touch /swapfile
+	chmod 600 /swapfile
+	dd if=/dev/zero of=/swapfile bs=1024k count=2048
+	mkswap /swapfile
+	swapon /swapfile
+		backup /etc/fstab
+	echo "/swapfile none swap sw 0 0" >> /etc/fstab
+	sysctl -w vm.swappiness=30
+}
+
 if [ $(tty) == /dev/tty1 ]; then
 	## Update Debian source files ##
 			backup /etc/apt/sources.list
@@ -17,14 +29,7 @@ if [ $(tty) == /dev/tty1 ]; then
 		apt-get -y autoremove
 
 	## Configure swapfile ##
-		touch /swapfile
-		chmod 600 /swapfile
-		dd if=/dev/zero of=/swapfile bs=1024k count=2048
-		mkswap /swapfile
-		swapon /swapfile
-			backup /etc/fstab
-		echo "/swapfile none swap sw 0 0" >> /etc/fstab
-		sysctl -w vm.swappiness=30
+		# create_swapfile
 
 	## SSH port settings ##
 			backup /etc/ssh/sshd_config
