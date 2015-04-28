@@ -48,5 +48,5 @@ if [ $(tty) == /dev/tty1 ]; then
 		curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.02
     
 	## REBOOT ##
-		# reboot
+		reboot
 fi
