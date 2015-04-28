@@ -1,7 +1,7 @@
 ## X SERVER -- REMOTE DESKTOP -- OPENBOX -- BASIC APPLICATIONS ##
 
 source ${HOME}/.scripts/lib.sh
-# mount -o remount,rw /
+mount -o remount,rw /
 
 if [ $(tty) == /dev/tty1 ]; then
 	## Base Libraries ##
