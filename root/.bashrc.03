@@ -1,4 +1,4 @@
-## SSL -- NGINX -- BASE PHP -- ##
+## SSL -- NGINX -- PHP -- ##
 
 source ${HOME}/.scripts/lib.sh
 
@@ -25,7 +25,7 @@ if [ $(tty) == /dev/tty1 ]; then
 			backup /var/www/html/index.nginx-debian.html
 		curl --create-dirs -o /var/www/html/*.${DOMAIN}/index.html ${CBURL}/var/www/html/catchAll/index.html
 		sed -i 's|{{domain}}|'${DOMAIN}'|g' /var/www/html/*.${DOMAIN}/index.html
-		chown -R www-data:www-data /var/www/html
+		# chown -R www-data:www-data /var/www/html
 
 	## nginx Default Site Configuration ##
 		rm /etc/nginx/sites-enabled/default
@@ -34,14 +34,31 @@ if [ $(tty) == /dev/tty1 ]; then
 		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/*.${DOMAIN}
 		ln -s /etc/nginx/sites-available/*.${DOMAIN} /etc/nginx/sites-enabled/*.${DOMAIN}
 
-		service nginx restart
-
 	## PHP-FPM Installation ##
 		apt-get -y install php5-fpm
 			backup /etc/php5/fpm/php.ini
 		sed -i 's|.*cgi.fix_pathinfo=.*|cgi.fix_pathinfo=1|g' /etc/php5/fpm/php.ini
 			backup /etc/php5/fpm/pool.d/www.conf
 		mkdir /var/run/php5-fpm
+		
+	## PHP Extensions ##
+		
+		## php5-json | php5-cli
+		 
+		## Base Extensions  ##
+			apt-get -y install php5-intl php5-dev php5-curl php5-apcu
+			
+		## Sec & Auth Extensions ##
+			apt-get -y install php5-mcrypt php5-gnupg php-auth php-openid php5-oauth
+			
+		## Graphic Extensions ##
+			apt-get -y install php5-gd php5-imagick
+			
+		## Parsing Extensions ##
+			apt-get -y install php-xml-parser php5-xmlrpc php5-tidy
+			
+		## DB MExtensions ##
+			apt-get -y install php5-mysqlnd php5-pgsql php5-mongo php5-redis
 		
 	## PHP Info Configuration ##
 		curl -o /etc/php5/fpm/pool.d/php.${DOMAIN}.conf ${CBURL}/etc/php5/fpm/pool.d/php.conf
