@@ -16,4 +16,6 @@ fi
 # wget -P ${HOME} ${CBURL}/root/preseed.cfg
 # debconf-set-selections --verbose < ${PRESEED}
 # dpkg-reconfigure locales
+
+# echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen
 ######################
