@@ -4,15 +4,14 @@
 CBURL='https://raw.githubusercontent.com/kinologik/cloudbox/master'
 BCKUP=${HOME}'/.backup'
 
-alias mkdir="mkdir -p"
-
 backup() {
 	BCKDIR=$(dirname ${1})
 	BCKFILE=$(basename ${1})
-	mkdir ${BCKUP}${BCKDIR}
+	mkdir -p ${BCKUP}${BCKDIR}
     	mv ${1} ${BCKUP}${1}
 }
 
+curl -o /etc/default/locale ${CBURL}/etc/default/locale
 apt-get -y install curl
 
 # mkdir --parents ${BCKUP}'/'{home,etc,var/{www/html/{localhost,*},run}}
