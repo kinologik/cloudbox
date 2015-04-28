@@ -18,4 +18,7 @@ backup ${HOME}/.bashrc
 curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.01
 if [ $? != 0 ]; then echo ".bashrc download failed..."; exit; fi
 rm ${HOME}/start.sh
+	
+	cat /dev/null > /var/log/syslog
+	
 reboot
