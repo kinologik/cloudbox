@@ -48,6 +48,5 @@ if [ $(tty) == /dev/tty1 ]; then
 		curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.02
     
 	## REBOOT ##
-		mount -o remount,rw /
 		reboot
 fi
