@@ -70,6 +70,7 @@ if [ $(tty) == /dev/tty1 ]; then
 		
 		curl -o /etc/nginx/sites-available/php.${DOMAIN} ${CBURL}/etc/nginx/sites-available/php
 		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/php.${DOMAIN}
+		sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/sites-available/php.${DOMAIN}
 		ln -s /etc/nginx/sites-available/php.${DOMAIN} /etc/nginx/sites-enabled/php.${DOMAIN}
 
 		service php5-fpm restart && service nginx restart
