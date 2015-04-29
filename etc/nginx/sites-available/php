@@ -19,7 +19,7 @@ server {
 	location ~ ^/phpinfo/(.+\.php)$ {
 		alias /var/www/html/php.{{domain}}/$1;
 		
-		fastcgi_pass unix:/var/run/php5-fpm/php.{{domain}}.com.sock;
+		fastcgi_pass unix:/var/run/php5-fpm/php.{{domain}}.sock;
 		fastcgi_index  index.php;
 		fastcgi_param  SCRIPT_FILENAME  $request_filename;
 		include fastcgi_params;
