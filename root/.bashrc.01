@@ -39,6 +39,7 @@ if [ $(tty) == /dev/tty1 ]; then
 	## Set hostname, timezone && locale ##
 			backup /etc/hostname
 		echo -e ${HNAME} > /etc/hostname
+		sed -i 's|127.0.0.1 localhost|127.0.0.1 localhost '${HNAME}'|g' /etc/hosts
 		
 			backup /etc/timezone
 		echo ${TZONE} > /etc/timezone
