@@ -43,23 +43,34 @@ if [ $(tty) == /dev/tty1 ]; then
 		mkdir /var/run/php5-fpm
 		
 	## PHP Extensions ##
-		
-		## php5-json | php5-cli
 		 
 		## Base Extensions  ##
-			apt-get -y install php5-intl php5-dev php5-curl php5-apcu
+			apt-get -y install php5-intl
+			apt-get -y install php5-dev
+			apt-get -y install php5-curl
+			apt-get -y install php5-apcu
 			
 		## Sec & Auth Extensions ##
-			apt-get -y install php5-mcrypt php5-gnupg php-auth php-openid php5-oauth
-			
-		## Graphic Extensions ##
-			apt-get -y install php5-gd php5-imagick
+			apt-get -y install php5-mcrypt
+			apt-get -y install php5-gnupg
+			apt-get -y install php-auth
+			apt-get -y install php-openid
+			apt-get -y install php5-oauth
 			
 		## Parsing Extensions ##
-			apt-get -y install php-xml-parser php5-xmlrpc php5-tidy
+			apt-get -y install php-xml-parser
+			apt-get -y install php5-xmlrpc
+			apt-get -y install php5-tidy
 			
-		## DB MExtensions ##
-			apt-get -y install php5-mysqlnd php5-pgsql php5-mongo php5-redis
+		## DB Extensions ##
+			apt-get -y install php5-mysqlnd
+			apt-get -y install php5-pgsql
+			apt-get -y install php5-mongo
+			apt-get -y install php5-redis
+			
+		## Graphic Extensions ##
+			apt-get -y install php5-gd
+			apt-get -y install php5-imagick
 		
 	## PHP Info Configuration ##
 		curl -o /etc/php5/fpm/pool.d/php.${DOMAIN}.conf ${CBURL}/etc/php5/fpm/pool.d/php.conf
