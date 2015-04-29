@@ -1,0 +1,9 @@
+## LARAVEL 5 w/ POSTGRESQL ##
+
+source ${HOME}/.scripts/lib.sh
+
+if [ $(tty) == /dev/tty1 ]; then
+	## Laravel 5 installation ##
+
+
+fi
