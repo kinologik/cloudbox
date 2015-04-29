@@ -1,0 +1,16 @@
+## POSTGRESQL -- ADMINER ##
+
+source ${HOME}/.scripts/lib.sh
+
+if [ $(tty) == /dev/tty1 ]; then
+	## PostgreSQL ##
+		apt-get -y install postgresql
+		apt-get -y install postgresql-client
+		PGPW='newPW'
+		
+		sudo -i -u postgres psql -U postgres -d postgres -c "alter user postgres with password '${PGPW}';"
+		
+	## Adminer ##
+		curl --create-dirs -kL -o /var/www/html/adminer.${DOMAIN}/index.php https://www.adminer.org/latest-en.php
+	
+fi
