@@ -12,6 +12,7 @@ if [ $(tty) == /dev/tty1 ]; then
 		
 	## Adminer ##
 		curl --create-dirs -kL -o /var/www/html/adminer.${DOMAIN}/index.php https://www.adminer.org/latest-en.php
+		sed -i 's|,h(SERVER),|,h(SERVER)?:"localhost",|g' /var/www/html/adminer.${DOMAIN}/index.php
 		chown -R www-data:www-data /var/www/html/adminer.${DOMAIN}
 		
 	## nginx && PHP-FPM Configuration ##
