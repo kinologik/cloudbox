@@ -19,7 +19,8 @@ if [ $(tty) == /dev/tty1 ]; then
 			backup /etc/nginx/nginx.conf
 		curl -o /etc/nginx/nginx.conf ${CBURL}/etc/nginx/nginx.conf
 		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/nginx.conf
-		mkdir /var/log/nginx/access && mkdir /var/log/nginx/error
+		mkdir /var/log/nginx/access
+		mkdir /var/log/nginx/error
 
 	## WWW File Structure ##
 			backup /var/www/html/index.nginx-debian.html
