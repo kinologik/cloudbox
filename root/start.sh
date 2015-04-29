@@ -13,6 +13,7 @@
 	locale-gen
 	
 ## Install curl && set environment variables
+	apt-get -y install sudo
 	apt-get -y install curl
 	ln -s /etc/environment ${HOME}/.ssh/environment
 
