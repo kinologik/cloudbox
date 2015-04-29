@@ -43,7 +43,6 @@ if [ $(tty) == /dev/tty1 ]; then
 		mkdir /var/run/php5-fpm
 		
 	## PHP Extensions ##
-		 
 		## Base Extensions  ##
 			apt-get -y install php5-intl
 			apt-get -y install php5-dev
@@ -72,6 +71,10 @@ if [ $(tty) == /dev/tty1 ]; then
 		## Graphic Extensions ##
 			apt-get -y install php5-gd
 			apt-get -y install php5-imagick
+			
+	## Composer ##
+		curl -sS https://getcomposer.org/installer | php
+		mv composer.phar /usr/local/bin/composer
 		
 	## PHP Info Configuration ##
 		curl -o /etc/php5/fpm/pool.d/php.${DOMAIN}.conf ${CBURL}/etc/php5/fpm/pool.d/php.conf
