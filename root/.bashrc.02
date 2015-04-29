@@ -32,7 +32,7 @@ function install_openbox
 if [ $(tty) == /dev/tty1 ]; then
 	## Base Libraries ##
 		apt-get -y install git software-properties-common build-essential automake libtool pkg-config flex bison
-		apt-get -y install libcurl4-openssl-dev apache2-utils libmagickwand-dev libmagickcore-dev
+		apt-get -y install bcrypt libcurl4-openssl-dev apache2-utils libmagickwand-dev libmagickcore-dev
 
 	## X SERVER ##
 		install_xserver
