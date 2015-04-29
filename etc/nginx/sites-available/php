@@ -12,12 +12,12 @@ server {
 	}
     
 	location /phpinfo/ {
-		alias /var/www/html/php.{{domain}}.com/;
+		alias /var/www/html/php.{{domain}}/;
 		index index.php;
 	}
  
 	location ~ ^/phpinfo/(.+\.php)$ {
-		alias /var/www/html/php.{{domain}}.com/$1;
+		alias /var/www/html/php.{{domain}}/$1;
 		
 		fastcgi_pass unix:/var/run/php5-fpm/php.{{domain}}.com.sock;
 		fastcgi_index  index.php;
