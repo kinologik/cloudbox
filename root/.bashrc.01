@@ -49,7 +49,7 @@ if [ $(tty) == /dev/tty1 ]; then
 		
 			backup /etc/default/locale
 		curl -o /etc/default/locale ${CBURL}/etc/default/locale
-		dpkg-reconfigure -f noninteractive locales
+		# dpkg-reconfigure -f noninteractive locales
 
 	## Delete bash history && load next installation script ##
 		cat /dev/null > ${HOME}/.bash_history
