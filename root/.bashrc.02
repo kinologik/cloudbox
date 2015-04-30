@@ -154,6 +154,6 @@ if [ $(tty) == /dev/tty1 ]; then
 	## Load final script && REBOOT ##
 		cat /dev/null > /var/log/syslog
 		curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc
-		reboot
+		# reboot
 fi
 
