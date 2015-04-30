@@ -44,6 +44,8 @@ if [ $(tty) == /dev/tty1 ]; then
 		apt-get -y install php5-fpm
 			backup /etc/php5/fpm/php.ini
 		sed -i 's|.*cgi.fix_pathinfo=.*|cgi.fix_pathinfo=1|g' /etc/php5/fpm/php.ini
+			backup /etc/php5/fpm/php-fpm.conf
+		curl -o /etc/php5/fpm/php-fpm.conf ${CBURL}/etc/php5/fpm/php-fpm.conf
 			backup /etc/php5/fpm/pool.d/www.conf
 		mkdir -p /var/run/php5-fpm/localhost
 		
@@ -85,7 +87,7 @@ if [ $(tty) == /dev/tty1 ]; then
 		# curl -o /etc/php5/fpm/pool.d/php.${DOMAIN}.conf ${CBURL}/etc/php5/fpm/pool.d/php.conf
 		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/php5/fpm/pool.d/php.${DOMAIN}.conf
 		curl -o /etc/php5/fpm/pool.d/localhost/phpinfo.conf ${CBURL}/etc/php5/fpm/pool.d/localhost/phpinfo.conf
-		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/php5/fpm/pool.d/localhost/phpinfo.conf
+		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/php5/fpm/pool.d/localhost/phpinfo.conf
 		
 		# curl --create-dirs -o /var/www/html/php.${DOMAIN}/index.php ${CBURL}/var/www/html/php/index.php
 		curl --create-dirs -o /var/www/html/localhost/phpinfo/index.php ${CBURL}/var/www/html/localhost/phpinfo/index.php
@@ -96,7 +98,7 @@ if [ $(tty) == /dev/tty1 ]; then
 		# sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/sites-available/php.${DOMAIN}
 		# ln -s /etc/nginx/sites-available/php.${DOMAIN} /etc/nginx/sites-enabled/php.${DOMAIN}
 		curl -o /etc/nginx/sites-available/localhost/phpinfo ${CBURL}/etc/nginx/sites-available/localhost/phpinfo
-		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/localhost/phpinfo
+		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/localhost/phpinfo
 		sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/sites-available/localhost/phpinfo
 		ln -s /etc/nginx/sites-available/localhost/phpinfo /etc/nginx/sites-enabled/localhost/phpinfo
 
