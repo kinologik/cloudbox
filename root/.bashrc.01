@@ -45,7 +45,7 @@ if [ $(tty) == /dev/tty1 ]; then
 		echo ${TZONE} > /etc/timezone
 			backup /etc/localtime
 		ln -s /usr/share/zoneinfo/${LTIME} /etc/localtime
-		dpkg-reconfigure -f noninteractive tzdata
+		# dpkg-reconfigure -f noninteractive tzdata
 		
 			backup /etc/default/locale
 		curl -o /etc/default/locale ${CBURL}/etc/default/locale
