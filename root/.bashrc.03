@@ -33,9 +33,12 @@ if [ $(tty) == /dev/tty1 ]; then
 	## nginx Default Site Configuration ##
 		rm /etc/nginx/sites-enabled/default
 			backup /etc/nginx/sites-available/default
-		curl -o /etc/nginx/sites-available/*.${DOMAIN} ${CBURL}/etc/nginx/sites-available/catchAll
-		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/*.${DOMAIN}
-		ln -s /etc/nginx/sites-available/*.${DOMAIN} /etc/nginx/sites-enabled/*.${DOMAIN}
+		# curl -o /etc/nginx/sites-available/*.${DOMAIN} ${CBURL}/etc/nginx/sites-available/catchAll
+		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/*.${DOMAIN}
+		# ln -s /etc/nginx/sites-available/*.${DOMAIN} /etc/nginx/sites-enabled/*.${DOMAIN}
+		curl -o /etc/nginx/sites-available/* ${CBURL}/etc/nginx/sites-available/catchAll
+		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/*
+		ln -s /etc/nginx/sites-available/* /etc/nginx/sites-enabled/*
 
 	## PHP-FPM Installation ##
 		apt-get -y install php5-fpm
