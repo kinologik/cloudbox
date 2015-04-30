@@ -21,8 +21,11 @@ if [ $(tty) == /dev/tty1 ]; then
 		
 		curl -o /etc/nginx/localhost-available/adminer ${CBURL}/etc/nginx/localhost-available/adminer
 		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/adminer.${DOMAIN}
-		sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/sites-available/adminer.${DOMAIN}
+		sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/localhost-available/adminer
 		ln -s /etc/nginx/localhost-available/adminer /etc/nginx/localhost-enabled/adminer
+		
+		
+		ln -s /etc/nginx/sites-available/localhost /etc/nginx/sites-enabled/localhost
 
 		service php5-fpm restart && service nginx restart
 fi
