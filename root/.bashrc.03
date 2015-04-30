@@ -49,7 +49,7 @@ if [ $(tty) == /dev/tty1 ]; then
 		curl -o /etc/php5/fpm/php-fpm.conf ${CBURL}/etc/php5/fpm/php-fpm.conf
 			backup /etc/php5/fpm/pool.d/www.conf
 		curl --create-dirs -o /etc/php5/fpm/pool.d/localhost/phpinfo.conf ${CBURL}/etc/php5/fpm/pool.d/localhost/phpinfo.conf
-		mkdir -p /run/php5-fpm/localhost
+		# mkdir -p /run/php5-fpm/localhost
 		
 	## PHP Extensions && Composer ##
 		## Base Extensions  ##
