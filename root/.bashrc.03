@@ -41,7 +41,7 @@ if [ $(tty) == /dev/tty1 ]; then
 
 	## PHP-FPM Installation ##
 		apt-get -y install php5-fpm
-			backup /etc/php5/fpm/php.ini
+			copy /etc/php5/fpm/php.ini
 		sed -i 's|.*cgi.fix_pathinfo=.*|cgi.fix_pathinfo=1|g' /etc/php5/fpm/php.ini
 			backup /etc/php5/fpm/php-fpm.conf
 		curl -o /etc/php5/fpm/php-fpm.conf ${CBURL}/etc/php5/fpm/php-fpm.conf
