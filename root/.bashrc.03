@@ -19,8 +19,8 @@ if [ $(tty) == /dev/tty1 ]; then
 			backup /etc/nginx/nginx.conf
 		curl -o /etc/nginx/nginx.conf ${CBURL}/etc/nginx/nginx.conf
 		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/nginx.conf
-		mkdir /var/log/nginx/access
-		mkdir /var/log/nginx/error
+		mkdir /var/log/nginx/access/localhost
+		mkdir /var/log/nginx/error/localhost
 
 	## WWW File Structure ##
 			backup /var/www/html/index.nginx-debian.html
@@ -45,7 +45,7 @@ if [ $(tty) == /dev/tty1 ]; then
 			backup /etc/php5/fpm/php.ini
 		sed -i 's|.*cgi.fix_pathinfo=.*|cgi.fix_pathinfo=1|g' /etc/php5/fpm/php.ini
 			backup /etc/php5/fpm/pool.d/www.conf
-		mkdir /var/run/php5-fpm
+		mkdir -p /var/run/php5-fpm/localhost
 		
 	## PHP Extensions ##
 		## Base Extensions  ##
@@ -82,16 +82,23 @@ if [ $(tty) == /dev/tty1 ]; then
 		mv composer.phar /usr/local/bin/composer
 		
 	## PHP Info Configuration ##
-		curl -o /etc/php5/fpm/pool.d/php.${DOMAIN}.conf ${CBURL}/etc/php5/fpm/pool.d/php.conf
-		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/php5/fpm/pool.d/php.${DOMAIN}.conf
+		# curl -o /etc/php5/fpm/pool.d/php.${DOMAIN}.conf ${CBURL}/etc/php5/fpm/pool.d/php.conf
+		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/php5/fpm/pool.d/php.${DOMAIN}.conf
+		curl -o /etc/php5/fpm/pool.d/localhost/phpinfo.conf ${CBURL}/etc/php5/fpm/pool.d/localhost/phpinfo.conf
+		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/php5/fpm/pool.d/localhost/phpinfo.conf
 		
-		curl --create-dirs -o /var/www/html/php.${DOMAIN}/index.php ${CBURL}/var/www/html/php/index.php
+		# curl --create-dirs -o /var/www/html/php.${DOMAIN}/index.php ${CBURL}/var/www/html/php/index.php
+		curl --create-dirs -o /var/www/html/localhost/phpinfo/index.php ${CBURL}/var/www/html/localhost/phpinfo/index.php
 		chown -R www-data:www-data /var/www/html
 		
-		curl -o /etc/nginx/sites-available/php.${DOMAIN} ${CBURL}/etc/nginx/sites-available/php
-		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/php.${DOMAIN}
-		sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/sites-available/php.${DOMAIN}
-		ln -s /etc/nginx/sites-available/php.${DOMAIN} /etc/nginx/sites-enabled/php.${DOMAIN}
+		# curl -o /etc/nginx/sites-available/php.${DOMAIN} ${CBURL}/etc/nginx/sites-available/php
+		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/php.${DOMAIN}
+		# sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/sites-available/php.${DOMAIN}
+		# ln -s /etc/nginx/sites-available/php.${DOMAIN} /etc/nginx/sites-enabled/php.${DOMAIN}
+		curl -o /etc/nginx/sites-available/localhost/phpinfo ${CBURL}/etc/nginx/sites-available/localhost/phpinfo
+		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/localhost/phpinfo
+		sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/sites-available/localhost/phpinfo
+		ln -s /etc/nginx/sites-available/localhost/phpinfo /etc/nginx/sites-enabled/localhost/phpinfo
 
 		service php5-fpm restart && service nginx restart
 fi
