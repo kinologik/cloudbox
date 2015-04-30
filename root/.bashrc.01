@@ -60,5 +60,5 @@ if [ $(tty) == /dev/tty1 ]; then
 
 	## REBOOT ##
 		cat /dev/null > /var/log/syslog
-		reboot
+		# reboot
 fi
