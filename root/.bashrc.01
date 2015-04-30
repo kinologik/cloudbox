@@ -18,7 +18,7 @@ if [ $(tty) == /dev/tty1 ]; then
 	## Update Debian source files ##
 			backup /etc/apt/sources.list
 		curl -o /etc/apt/sources.list ${CBURL}/etc/apt/sources.${OSDIST}.list
-		apt-get update
+		apt-get update && apt-get update
 		if [ $? != 0 ]; then echo "update failed..."; exit; fi
 		curl -o /etc/apt/sources.list.d/experimental.list ${CBURL}/etc/apt/sources.list.d/experimental.list
 		apt-get update
