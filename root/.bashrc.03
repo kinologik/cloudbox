@@ -46,9 +46,10 @@ if [ $(tty) == /dev/tty1 ]; then
 			backup /etc/php5/fpm/php-fpm.conf
 		curl -o /etc/php5/fpm/php-fpm.conf ${CBURL}/etc/php5/fpm/php-fpm.conf
 			backup /etc/php5/fpm/pool.d/www.conf
+		curl -o /etc/php5/fpm/pool.d/localhost/phpinfo.conf ${CBURL}/etc/php5/fpm/pool.d/localhost/phpinfo.conf
 		mkdir -p /var/run/php5-fpm/localhost
 		
-	## PHP Extensions ##
+	## PHP Extensions && Composer ##
 		## Base Extensions  ##
 			apt-get -y install php5-intl
 			apt-get -y install php5-dev
@@ -78,16 +79,11 @@ if [ $(tty) == /dev/tty1 ]; then
 			apt-get -y install php5-gd
 			apt-get -y install php5-imagick
 			
-	## Composer ##
-		curl -sS https://getcomposer.org/installer | php
-		mv composer.phar /usr/local/bin/composer
+		## Composer ##
+			curl -sS https://getcomposer.org/installer | php
+			mv composer.phar /usr/local/bin/composer
 		
 	## PHP Info Configuration ##
-		# curl -o /etc/php5/fpm/pool.d/php.${DOMAIN}.conf ${CBURL}/etc/php5/fpm/pool.d/php.conf
-		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/php5/fpm/pool.d/php.${DOMAIN}.conf
-		curl -o /etc/php5/fpm/pool.d/localhost/phpinfo.conf ${CBURL}/etc/php5/fpm/pool.d/localhost/phpinfo.conf
-		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/php5/fpm/pool.d/localhost/phpinfo.conf
-		
 		# curl --create-dirs -o /var/www/html/php.${DOMAIN}/index.php ${CBURL}/var/www/html/php/index.php
 		curl --create-dirs -o /var/www/html/localhost/phpinfo/index.php ${CBURL}/var/www/html/localhost/phpinfo/index.php
 		chown -R www-data:www-data /var/www/html
