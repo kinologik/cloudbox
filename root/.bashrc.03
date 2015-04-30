@@ -20,6 +20,7 @@ if [ $(tty) == /dev/tty1 ]; then
 		curl -o /etc/nginx/nginx.conf ${CBURL}/etc/nginx/nginx.conf
 		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/nginx.conf
 		# mkdir /etc/nginx/sites-enabled/localhost
+		mkdir /etc/nginx/localhost-enabled
 		mkdir -p /var/log/nginx/localhost
 
 	## WWW File Structure ##
