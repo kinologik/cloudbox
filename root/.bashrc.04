@@ -11,18 +11,18 @@ if [ $(tty) == /dev/tty1 ]; then
 		sudo -i -u postgres psql -U postgres -d postgres -c "alter user postgres with password '${PGPW}';"
 		
 	## Adminer ##
-		curl --create-dirs -kL -o /var/www/html/adminer.${DOMAIN}/index.php https://www.adminer.org/latest-en.php
-		sed -i 's|,h(SERVER),|,h(SERVER)?:"localhost",|g' /var/www/html/adminer.${DOMAIN}/index.php
-		chown -R www-data:www-data /var/www/html/adminer.${DOMAIN}
+		curl --create-dirs -kL -o /var/www/html/localhost/adminer/index.php https://www.adminer.org/latest-en.php
+		sed -i 's|,h(SERVER),|,h(SERVER)?:"localhost",|g' /var/www/html/localhost/adminer/index.php
+		chown -R www-data:www-data /var/www/html/localhost/adminer/index.php
 		
 	## nginx && PHP-FPM Configuration ##
-		curl -o /etc/php5/fpm/pool.d/adminer.${DOMAIN}.conf ${CBURL}/etc/php5/fpm/pool.d/adminer.conf
-		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/php5/fpm/pool.d/adminer.${DOMAIN}.conf
+		curl -o /etc/php5/fpm/pool.d/localhost/adminer.conf ${CBURL}/etc/php5/fpm/pool.d/localhost/adminer.conf
+		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/php5/fpm/pool.d/adminer.${DOMAIN}.conf
 		
-		curl -o /etc/nginx/sites-available/adminer.${DOMAIN} ${CBURL}/etc/nginx/sites-available/adminer
-		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/adminer.${DOMAIN}
+		curl -o /etc/nginx/localhost-available/adminer ${CBURL}/etc/nginx/localhost-available/adminer
+		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/adminer.${DOMAIN}
 		sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/sites-available/adminer.${DOMAIN}
-		ln -s /etc/nginx/sites-available/adminer.${DOMAIN} /etc/nginx/sites-enabled/adminer.${DOMAIN}
+		ln -s /etc/nginx/localhost-available/adminer /etc/nginx/localhost-enabled/adminer
 
 		service php5-fpm restart && service nginx restart
 fi
