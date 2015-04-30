@@ -14,7 +14,27 @@ function create_swapfile
 	sysctl -w vm.swappiness=30
 }
 
+function set_HTL
+{
+		backup /etc/hostname
+	echo -e ${HNAME} > /etc/hostname
+	sed -i 's|127.0.0.1 localhost|127.0.0.1 localhost '${HNAME}'|g' /etc/hosts
+		
+		backup /etc/timezone
+	echo ${TZONE} > /etc/timezone
+		backup /etc/localtime
+	ln -s /usr/share/zoneinfo/${LTIME} /etc/localtime
+	# dpkg-reconfigure -f noninteractive tzdata
+		
+		backup /etc/default/locale
+	curl -o /etc/default/locale ${CBURL}/etc/default/locale
+	# dpkg-reconfigure -f noninteractive locales
+}
+
 if [ $(tty) == /dev/tty1 ]; then
+	## Set hostname, timezone && locale ##
+		set_HTL
+		
 	## Update Debian source files ##
 			backup /etc/apt/sources.list
 		curl -o /etc/apt/sources.list ${CBURL}/etc/apt/sources.${OSDIST}.list
@@ -37,21 +57,6 @@ if [ $(tty) == /dev/tty1 ]; then
 			backup /etc/ssh/sshd_config
 		curl -o /etc/ssh/sshd_config ${CBURL}/etc/ssh/sshd_config
 		sed -i 's|{{port}}|'${SSHPORT}'|g' /etc/ssh/sshd_config
-
-	## Set hostname, timezone && locale ##
-			backup /etc/hostname
-		echo -e ${HNAME} > /etc/hostname
-		sed -i 's|127.0.0.1 localhost|127.0.0.1 localhost '${HNAME}'|g' /etc/hosts
-		
-			backup /etc/timezone
-		echo ${TZONE} > /etc/timezone
-			backup /etc/localtime
-		ln -s /usr/share/zoneinfo/${LTIME} /etc/localtime
-		# dpkg-reconfigure -f noninteractive tzdata
-		
-			backup /etc/default/locale
-		curl -o /etc/default/locale ${CBURL}/etc/default/locale
-		# dpkg-reconfigure -f noninteractive locales
 
 	## Delete bash history && load next installation script ##
 		cat /dev/null > ${HOME}/.bash_history
