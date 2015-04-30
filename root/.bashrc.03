@@ -19,8 +19,8 @@ if [ $(tty) == /dev/tty1 ]; then
 			backup /etc/nginx/nginx.conf
 		curl -o /etc/nginx/nginx.conf ${CBURL}/etc/nginx/nginx.conf
 		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/nginx.conf
-		mkdir /etc/nginx/sites-enabled/localhost
-		mkdir -p /var/log/nginx/{access/localhost,/error/localhost}
+		# mkdir /etc/nginx/sites-enabled/localhost
+		mkdir -p /var/log/nginx/localhost
 
 	## WWW File Structure ##
 			backup /var/www/html/index.nginx-debian.html
@@ -93,10 +93,12 @@ if [ $(tty) == /dev/tty1 ]; then
 		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/php.${DOMAIN}
 		# sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/sites-available/php.${DOMAIN}
 		# ln -s /etc/nginx/sites-available/php.${DOMAIN} /etc/nginx/sites-enabled/php.${DOMAIN}
-		curl --create-dirs -o /etc/nginx/sites-available/localhost/phpinfo ${CBURL}/etc/nginx/sites-available/localhost/phpinfo
+		# curl --create-dirs -o /etc/nginx/sites-available/localhost/phpinfo ${CBURL}/etc/nginx/sites-available/localhost/phpinfo
+		curl --create-dirs -o /etc/nginx/localhost-available/phpinfo ${CBURL}/etc/nginx/localhost-available/phpinfo
 		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/localhost/phpinfo
-		sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/sites-available/localhost/phpinfo
-		ln -s /etc/nginx/sites-available/localhost/phpinfo /etc/nginx/sites-enabled/localhost/phpinfo
+		sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/localhost-available/phpinfo
+		# ln -s /etc/nginx/sites-available/localhost/phpinfo /etc/nginx/sites-enabled/localhost/phpinfo
+		ln -s /etc/nginx/localhost-available/phpinfo /etc/nginx/localhost-enabled/phpinfo
 
 		service php5-fpm restart && service nginx restart
 fi
