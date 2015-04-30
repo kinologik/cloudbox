@@ -92,7 +92,7 @@ if [ $(tty) == /dev/tty1 ]; then
 		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/php.${DOMAIN}
 		# sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/sites-available/php.${DOMAIN}
 		# ln -s /etc/nginx/sites-available/php.${DOMAIN} /etc/nginx/sites-enabled/php.${DOMAIN}
-		curl -o /etc/nginx/sites-available/localhost/phpinfo ${CBURL}/etc/nginx/sites-available/localhost/phpinfo
+		curl --create-dirs -o /etc/nginx/sites-available/localhost/phpinfo ${CBURL}/etc/nginx/sites-available/localhost/phpinfo
 		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/localhost/phpinfo
 		sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/sites-available/localhost/phpinfo
 		ln -s /etc/nginx/sites-available/localhost/phpinfo /etc/nginx/sites-enabled/localhost/phpinfo
