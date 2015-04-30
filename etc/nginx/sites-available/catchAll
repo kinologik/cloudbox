@@ -7,7 +7,7 @@ server {
     
 	server_name *.{{domain}};
     
-	root /var/www/html/*.{{domain}};
+	root /var/www/html/*;
 	index index.html;
     
 	location / {
