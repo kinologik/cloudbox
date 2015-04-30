@@ -24,8 +24,10 @@ if [ $(tty) == /dev/tty1 ]; then
 
 	## WWW File Structure ##
 			backup /var/www/html/index.nginx-debian.html
-		curl --create-dirs -o /var/www/html/*.${DOMAIN}/index.html ${CBURL}/var/www/html/catchAll/index.html
-		sed -i 's|{{domain}}|'${DOMAIN}'|g' /var/www/html/*.${DOMAIN}/index.html
+		# curl --create-dirs -o /var/www/html/*.${DOMAIN}/index.html ${CBURL}/var/www/html/catchAll/index.html
+		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /var/www/html/*.${DOMAIN}/index.html
+		curl --create-dirs -o /var/www/html/*/index.html ${CBURL}/var/www/html/catchAll/index.html
+		sed -i 's|{{domain}}|'${DOMAIN}'|g' /var/www/html/*/index.html
 		# chown -R www-data:www-data /var/www/html
 
 	## nginx Default Site Configuration ##
