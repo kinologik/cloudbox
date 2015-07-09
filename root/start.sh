@@ -8,10 +8,10 @@
 	source ${HOME}/.scripts/lib.sh
 
 ## Re-generate locale [en_US.UTF-8 UTF-8] (prevent apt-get warnings)
-	backup /etc/locale.gen
+		backup /etc/locale.gen
 	wget -P /etc ${CBURL}/etc/locale.gen
 	locale-gen
-	
+
 ## Install curl && set environment variables
 	apt-get -y install sudo
 	apt-get -y install curl
@@ -23,11 +23,11 @@
 	if [ $? != 0 ]; then echo "systemd autologin download failed..."; exit; fi
 
 ## Load next installation script && delete this script
-	backup ${HOME}/.bashrc
+		backup ${HOME}/.bashrc
 	curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.01
 	if [ $? != 0 ]; then echo ".bashrc download failed..."; exit; fi
 	rm ${HOME}/start.sh
-	
+
 ## REBOOT
 	cat /dev/null > /var/log/syslog
 	reboot
