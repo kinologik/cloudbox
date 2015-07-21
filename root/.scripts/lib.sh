@@ -1,4 +1,4 @@
-CBURL='https://raw.githubusercontent.com/kinologik/cloudbox/master'
+# CBURL='https://raw.githubusercontent.com/kinologik/cloudbox/master'
 # PRESEED=${HOME}'/preseed.cfg'
 BCKUP=${HOME}'/.backup'
 
