@@ -2,6 +2,10 @@ CBURL='https://raw.githubusercontent.com/kinologik/cloudbox/master'
 # PRESEED=${HOME}'/preseed.cfg'
 BCKUP=${HOME}'/.backup'
 
+timestamp() {
+	date +"%Y-%m-%d %T"
+}
+
 backup() {
 	BCKDIR=$(dirname ${1})
 	BCKFILE=$(basename ${1})
