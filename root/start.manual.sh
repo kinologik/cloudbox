@@ -3,24 +3,24 @@
 ## STARTING CLOUDBOX CLEAN INSTALLATION ##
 
 ## Import bash library ##
-	mkdir ${HOME}/.scripts
+#	mkdir ${HOME}/.scripts
 	wget -P ${HOME}/.scripts https://raw.githubusercontent.com/kinologik/cloudbox/master/root/.scripts/lib.sh
 	source ${HOME}/.scripts/lib.sh
 
 ## Re-generate locale [en_US.UTF-8 UTF-8] (prevent apt-get warnings)
-		backup /etc/locale.gen
-	wget -P /etc ${CBURL}/etc/locale.gen
-	locale-gen
+#		backup /etc/locale.gen
+#	wget -P /etc ${CBURL}/etc/locale.gen
+#	locale-gen
 
 ## Install curl && set environment variables
 	apt-get -y install sudo
 	apt-get -y install curl
-	ln -s /etc/environment ${HOME}/.ssh/environment
+#	ln -s /etc/environment ${HOME}/.ssh/environment
 
 ## Set autologin for TTY1
-	TTYLOGIN='/etc/systemd/system/getty@tty1.service.d/autologin.conf'
-	curl --create-dirs -o ${TTYLOGIN} ${CBURL}$(echo ${TTYLOGIN} | sed 's|@|-|g')
-	if [ $? != 0 ]; then echo "systemd autologin download failed..."; exit; fi
+#	TTYLOGIN='/etc/systemd/system/getty@tty1.service.d/autologin.conf'
+#	curl --create-dirs -o ${TTYLOGIN} ${CBURL}$(echo ${TTYLOGIN} | sed 's|@|-|g')
+#	if [ $? != 0 ]; then echo "systemd autologin download failed..."; exit; fi
 
 ## Load next installation script && delete this script
 		backup ${HOME}/.bashrc
