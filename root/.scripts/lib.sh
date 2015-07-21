@@ -1,5 +1,5 @@
 # PRESEED=${HOME}'/preseed.cfg'
-source ${HOME}/.scripts/var.sh
+source ${HOME}/.scripts/path.sh
 
 timestamp() {
 	date +"%Y-%m-%d %T"
