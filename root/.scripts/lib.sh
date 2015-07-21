@@ -1,6 +1,5 @@
-# CBURL='https://raw.githubusercontent.com/kinologik/cloudbox/master'
 # PRESEED=${HOME}'/preseed.cfg'
-BCKUP=${HOME}'/.backup'
+source ${HOME}/.scripts/var.sh
 
 timestamp() {
 	date +"%Y-%m-%d %T"
