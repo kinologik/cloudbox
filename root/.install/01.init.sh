@@ -69,8 +69,7 @@ if [ $(tty) == /dev/tty1 ]; then
 		update_ssh
 
 	## Delete bash history && load next installation script ##
-		cat /dev/null > ${HOME}/.bash_history
-		history -c
+		cat /dev/null > ${HOME}/.bash_history && history -c
 		mv -f ${HOME}/.install/02.desktop.sh ${HOME}/.bashrc
 
 	## REBOOT ##
