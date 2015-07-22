@@ -2,21 +2,22 @@
 
 source ${HOME}/.scripts/lib.sh
 
-function set_HTL
+function host_tz
 {
 		backup /etc/hostname
+		copy /etc/hosts
+		backup /etc/timezone
+		backup /etc/localtime
+		
 	echo -e ${HNAME} > /etc/hostname
 	sed -i 's|127.0.0.1 localhost|127.0.0.1 localhost '${HNAME}'|g' /etc/hosts
-		
-	#	backup /etc/timezone
-		copy /etc/timezone
-	# echo ${TZONE} > /etc/timezone
-		backup /etc/localtime
+
+	echo ${TZONE} > /etc/timezone
 	ln -s /usr/share/zoneinfo/${TZONE} /etc/localtime
 	# dpkg-reconfigure -f noninteractive tzdata
 		
-		backup /etc/default/locale
-	curl -o /etc/default/locale ${CBURL}/etc/default/locale
+	#	backup /etc/default/locale
+	# curl -o /etc/default/locale ${CBURL}/etc/default/locale
 	# dpkg-reconfigure -f noninteractive locales
 }
 
@@ -51,9 +52,16 @@ function create_swapfile
 	sysctl -w vm.swappiness=30
 }
 
+function update_ssh
+{
+		backup /etc/ssh/sshd_config
+	curl -o /etc/ssh/sshd_config ${CBURL}/etc/ssh/sshd_config
+	sed -i 's|{{port}}|'${SSHPORT}'|g' /etc/ssh/sshd_config
+}
+
 if [ $(tty) == /dev/tty1 ]; then
 	## Set hostname, timezone && locale ##
-		set_HTL
+		host_tz
 		
 	## Update Debian source files ##
 		update_sources
@@ -65,14 +73,13 @@ if [ $(tty) == /dev/tty1 ]; then
 		create_swapfile
 
 	## SSH port settings ##
-			backup /etc/ssh/sshd_config
-		curl -o /etc/ssh/sshd_config ${CBURL}/etc/ssh/sshd_config
-		sed -i 's|{{port}}|'${SSHPORT}'|g' /etc/ssh/sshd_config
+		update_ssh
 
 	## Delete bash history && load next installation script ##
 		cat /dev/null > ${HOME}/.bash_history
 		history -c
-		curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.02
+		mv -f ${HOME}/.install/02.desktop.sh ${HOME}/.bashrc
+		# curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.02
 
 	## REBOOT ##
 		cat /dev/null > /var/log/syslog
