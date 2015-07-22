@@ -14,11 +14,6 @@ function host_tz
 
 	echo ${TZONE} > /etc/timezone
 	ln -s /usr/share/zoneinfo/${TZONE} /etc/localtime
-	# dpkg-reconfigure -f noninteractive tzdata
-		
-	#	backup /etc/default/locale
-	# curl -o /etc/default/locale ${CBURL}/etc/default/locale
-	# dpkg-reconfigure -f noninteractive locales
 }
 
 function update_sources
@@ -26,9 +21,7 @@ function update_sources
 		backup /etc/apt/sources.list
 	curl -o /etc/apt/sources.list ${CBURL}/etc/apt/sources.${OSDIST}.list
 	apt-get update
-	if [ $? != 0 ]; then echo "update failed..."; exit; fi
-	# curl -o /etc/apt/sources.list.d/experimental.list ${CBURL}/etc/apt/sources.list.d/experimental.list
-	# apt-get update
+		if [ $? != 0 ]; then echo "update failed..."; exit; fi
 }
 
 function update_upgrade
@@ -36,7 +29,7 @@ function update_upgrade
 		backup /etc/apt/listchanges.conf
 	curl -o /etc/apt/listchanges.conf ${CBURL}/etc/apt/listchanges.conf
 	apt-get -y dist-upgrade
-	if [ $? != 0 ]; then echo "upgrade failed..."; exit; fi
+		if [ $? != 0 ]; then echo "upgrade failed..."; exit; fi
 	apt-get -y autoremove
 }
 
@@ -79,9 +72,10 @@ if [ $(tty) == /dev/tty1 ]; then
 		cat /dev/null > ${HOME}/.bash_history
 		history -c
 		mv -f ${HOME}/.install/02.desktop.sh ${HOME}/.bashrc
-		# curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.02
 
 	## REBOOT ##
 		cat /dev/null > /var/log/syslog
+		
+		echo 'Please reboot to continue ...'
 		# reboot
 fi
