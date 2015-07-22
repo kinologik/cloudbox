@@ -36,7 +36,7 @@
 		backup ${HOME}/.bashrc
 	mv -f ${HOME}/.install/01.init.sh ${HOME}/.bashrc
 	
-	rm ${HOME}/start.manual.sh
+	rm ${HOME}/start.sh
 
 ## Clear syslog && prompt for reboot
 	cat /dev/null > /var/log/syslog
