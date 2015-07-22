@@ -15,6 +15,7 @@
 	
 	apt-get -y install sudo
 	apt-get -y install curl
+	apt-get -y autoremove
 
 ## Set autologin for TTY1
 	echo 'Setting autologin...' && sleep 1
