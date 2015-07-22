@@ -2,31 +2,42 @@
 
 ## STARTING CLOUDBOX CLEAN INSTALLATION ##
 
-## Import bash library ##
-#	mkdir ${HOME}/.scripts
-	wget -P ${HOME}/.scripts https://raw.githubusercontent.com/kinologik/cloudbox/master/root/.scripts/lib.sh
+## Import libraries ##
+	echo 'Installing script libraries...' && sleep 1
+
+	source ${HOME}/.scripts/path.sh
+	
+	wget -P ${HOME}/.scripts ${CBURL}/root/.scripts/lib.sh
 	source ${HOME}/.scripts/lib.sh
 
-## Re-generate locale [en_US.UTF-8 UTF-8] (prevent apt-get warnings)
-#		backup /etc/locale.gen
-#	wget -P /etc ${CBURL}/etc/locale.gen
-#	locale-gen
-
-## Install curl && set environment variables
+## Install curl && sudo
+	echo 'Installing sudo and curl...' && sleep 1
+	
 	apt-get -y install sudo
 	apt-get -y install curl
-#	ln -s /etc/environment ${HOME}/.ssh/environment
 
 ## Set autologin for TTY1
-#	TTYLOGIN='/etc/systemd/system/getty@tty1.service.d/autologin.conf'
-#	curl --create-dirs -o ${TTYLOGIN} ${CBURL}$(echo ${TTYLOGIN} | sed 's|@|-|g')
-#	if [ $? != 0 ]; then echo "systemd autologin download failed..."; exit; fi
+	echo 'Setting autologin...' && sleep 1
+
+	rm ${TTYLOGIN}
+	cp /lib/systemd/system/getty@.service ${TTYLOGIN}
+	sed -i 's|ExecStart=.*|ExecStart=-/sbin/agetty --autologin root --noclear %I 38400 linux|g' ${TTYLOGIN}
 
 ## Load next installation script && delete this script
-		backup ${HOME}/.bashrc
-	curl -o ${HOME}/.bashrc ${CBURL}/root/.bashrc.01
-	if [ $? != 0 ]; then echo ".bashrc download failed..."; exit; fi
-	rm ${HOME}/start.sh
+	echo 'Downloading script files ...' && sleep 1
 
-## Clear syslog
+	mkdir ${HOME}/.install
+	curl -o ${HOME}/.install/01.init.sh ${CBURL}/root/.install/01.init.sh
+		if [ $? != 0 ]; then echo "01.init.sh download failed..."; exit; fi
+	curl -o ${HOME}/.install/02.desktop.sh ${CBURL}/root/.install/02.desktop.sh
+		if [ $? != 0 ]; then echo "02.desktop.sh download failed..."; exit; fi
+	
+		backup ${HOME}/.bashrc
+	mv -f ${HOME}/.install/01.init.sh ${HOME}/.bashrc
+	
+	rm ${HOME}/start.manual.sh
+
+## Clear syslog && prompt for reboot
 	cat /dev/null > /var/log/syslog
+	
+	echo 'Please reboot to continue ...'
