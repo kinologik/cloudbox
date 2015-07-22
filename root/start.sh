@@ -42,5 +42,4 @@
 	cat /dev/null > /var/log/syslog
 	
 	echo 'Reboot in 5 sec ...' && sleep 5
-	
 	reboot
