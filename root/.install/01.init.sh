@@ -68,13 +68,13 @@ if [ $(tty) == /dev/tty1 ]; then
 	## SSH port settings ##
 		update_ssh
 
-	## Delete bash history && load next installation script ##
-		cat /dev/null > ${HOME}/.bash_history && history -c
+	## Clear history ##
+		clear_history
+	
+	## Load next installation script ##
 		mv -f ${HOME}/.install/02.desktop.sh ${HOME}/.bashrc
 
 	## REBOOT ##
-		cat /dev/null > /var/log/syslog
-		
-		echo 'Please reboot to continue ...'
-		# reboot
+		echo 'Rebooting in 5 sec ...' && sleep 5
+		reboot
 fi
