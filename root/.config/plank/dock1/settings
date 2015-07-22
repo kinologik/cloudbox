@@ -15,3 +15,4 @@ LockItems=true
 PressureReveal=false
 PinnedOnly=true
 AutoPinning=false
+ShowDockItem=false
