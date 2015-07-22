@@ -18,3 +18,9 @@ copy() {
 	mkdir -p ${BCKUP}${BCKDIR}
     	cp ${1} ${BCKUP}${1}
 }
+
+clear_history() {
+	cat /dev/null > ${HOME}/.bash_history
+	history -c
+	cat /dev/null > /var/log/syslog
+}
