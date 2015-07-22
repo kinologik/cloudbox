@@ -1,4 +1,3 @@
-# PRESEED=${HOME}'/preseed.cfg'
 source ${HOME}/.scripts/path.sh
 
 timestamp() {
