@@ -37,7 +37,6 @@ if [ $(tty) == /dev/tty1 ]; then
 			backup /etc/php5/fpm/php-fpm.conf
 		curl -o /etc/php5/fpm/php-fpm.conf ${CBURL}/etc/php5/fpm/php-fpm.conf
 			backup /etc/php5/fpm/pool.d/www.conf
-		curl --create-dirs -o /etc/php5/fpm/pool.d/phpinfo.conf ${CBURL}/etc/php5/fpm/pool.d/phpinfo.conf
 		
 	## PHP Extensions && Composer ##
 		## Base Extensions  ##
@@ -74,6 +73,8 @@ if [ $(tty) == /dev/tty1 ]; then
 			mv composer.phar /usr/local/bin/composer
 		
 	## PHP Info Configuration ##
+		curl --create-dirs -o /etc/php5/fpm/pool.d/phpinfo.conf ${CBURL}/etc/php5/fpm/pool.d/phpinfo.conf
+	
 		curl --create-dirs -o /var/www/html/phpinfo/index.php ${CBURL}/var/www/html/localhost/phpinfo/index.php
 		chown -R www-data:www-data /var/www/html
 		curl --create-dirs -o /etc/nginx/sites-available/phpinfo ${CBURL}/etc/nginx/sites-available/phpinfo
