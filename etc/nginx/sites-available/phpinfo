@@ -31,6 +31,6 @@ server {
 		root /usr/share/nginx/www;
 	}
     
-	access_log /var/log/nginx/localhost/phpinfo.access.log;
-	error_log /var/log/nginx/localhost/phpinfo.error.log;
+	access_log /var/log/nginx/phpinfo.access.log;
+	error_log /var/log/nginx/phpinfo.error.log;
 }
