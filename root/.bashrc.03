@@ -3,10 +3,6 @@
 source ${HOME}/.scripts/lib.sh
 
 if [ $(tty) == /dev/tty1 ]; then
-	## Self-Signed Certificate ##
-		mkdir --parents /etc/ssl/${DOMAIN}/certs && mkdir --parents /etc/ssl/${DOMAIN}/private
-		SSLSUBJ='/C='${CERTC}'/ST='${CERTST}'/L='${CERTL}'/O='${CERTO}'/CN=*.'${DOMAIN}
-		openssl req -x509 -sha256 -nodes -days 5480 -newkey rsa:4096 -out /etc/ssl/${DOMAIN}/certs/${DOMAIN}.pem -keyout /etc/ssl/${DOMAIN}/private/${DOMAIN}.key -utf8 -subj "${SSLSUBJ}"
 
 	## nginx Installation ##
 		nginx=development
@@ -19,24 +15,17 @@ if [ $(tty) == /dev/tty1 ]; then
 			backup /etc/nginx/nginx.conf
 		curl -o /etc/nginx/nginx.conf ${CBURL}/etc/nginx/nginx.conf
 		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/nginx.conf
-		# mkdir /etc/nginx/sites-enabled/localhost
-		mkdir /etc/nginx/localhost-enabled
-		mkdir -p /var/log/nginx/localhost
+		mkdir /var/log/nginx/access && mkdir /var/log/nginx/error
 
 	## WWW File Structure ##
 			backup /var/www/html/index.nginx-debian.html
-		# curl --create-dirs -o /var/www/html/*.${DOMAIN}/index.html ${CBURL}/var/www/html/catchAll/index.html
-		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /var/www/html/*.${DOMAIN}/index.html
 		curl --create-dirs -o /var/www/html/*/index.html ${CBURL}/var/www/html/catchAll/index.html
 		sed -i 's|{{domain}}|'${DOMAIN}'|g' /var/www/html/*/index.html
-		# chown -R www-data:www-data /var/www/html
+		chown -R www-data:www-data /var/www/html
 
 	## nginx Default Site Configuration ##
 		rm /etc/nginx/sites-enabled/default
 			backup /etc/nginx/sites-available/default
-		# curl -o /etc/nginx/sites-available/*.${DOMAIN} ${CBURL}/etc/nginx/sites-available/catchAll
-		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/*.${DOMAIN}
-		# ln -s /etc/nginx/sites-available/*.${DOMAIN} /etc/nginx/sites-enabled/*.${DOMAIN}
 		curl -o /etc/nginx/sites-available/* ${CBURL}/etc/nginx/sites-available/catchAll
 		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/*
 		ln -s /etc/nginx/sites-available/* /etc/nginx/sites-enabled/*
@@ -48,7 +37,7 @@ if [ $(tty) == /dev/tty1 ]; then
 			backup /etc/php5/fpm/php-fpm.conf
 		curl -o /etc/php5/fpm/php-fpm.conf ${CBURL}/etc/php5/fpm/php-fpm.conf
 			backup /etc/php5/fpm/pool.d/www.conf
-		curl --create-dirs -o /etc/php5/fpm/pool.d/localhost/phpinfo.conf ${CBURL}/etc/php5/fpm/pool.d/localhost/phpinfo.conf
+		curl --create-dirs -o /etc/php5/fpm/pool.d/phpinfo.conf ${CBURL}/etc/php5/fpm/pool.d/phpinfo.conf
 		# mkdir -p /run/php5-fpm/localhost
 		
 	## PHP Extensions && Composer ##
@@ -58,9 +47,10 @@ if [ $(tty) == /dev/tty1 ]; then
 			apt-get -y install php5-curl
 			apt-get -y install php5-apcu
 			apt-get -y install php5-xdebug
+			## apt-get -y install php5-intl php5-dev php5-apcu php5-xdebug php5-curl
 			
 		## Sec & Auth Extensions ##
-			apt-get -y install php5-mcrypt
+			apt-get -y install php5-mcrypt php5-curl
 			apt-get -y install php5-gnupg
 			apt-get -y install php-auth
 			apt-get -y install php-openid
