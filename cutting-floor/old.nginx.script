@@ -1,0 +1,105 @@
+## SSL -- NGINX -- PHP -- ##
+
+source ${HOME}/.scripts/lib.sh
+
+if [ $(tty) == /dev/tty1 ]; then
+
+	## nginx Installation ##
+		nginx=development
+		apt-key adv --keyserver keyserver.ubuntu.com --recv-keys C300EE8C
+		curl -o /etc/apt/sources.list.d/nginx.list ${CBURL}/etc/apt/sources.list.d/nginx.list
+		apt-get update
+		apt-get -y install nginx
+
+	## nginx Configuration ##
+			backup /etc/nginx/nginx.conf
+		curl -o /etc/nginx/nginx.conf ${CBURL}/etc/nginx/nginx.conf
+		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/nginx.conf
+		mkdir /var/log/nginx/access && mkdir /var/log/nginx/error
+
+	## WWW File Structure ##
+			backup /var/www/html/index.nginx-debian.html
+		curl --create-dirs -o /var/www/html/*/index.html ${CBURL}/var/www/html/catchAll/index.html
+		sed -i 's|{{domain}}|'${DOMAIN}'|g' /var/www/html/*/index.html
+		chown -R www-data:www-data /var/www/html
+
+	## nginx Default Site Configuration ##
+		rm /etc/nginx/sites-enabled/default
+			backup /etc/nginx/sites-available/default
+		curl -o /etc/nginx/sites-available/* ${CBURL}/etc/nginx/sites-available/catchAll
+		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/*
+		ln -s /etc/nginx/sites-available/* /etc/nginx/sites-enabled/*
+
+	## PHP-FPM Installation ##
+		apt-get -y install php5-fpm
+			copy /etc/php5/fpm/php.ini
+		sed -i 's|.*cgi.fix_pathinfo=.*|cgi.fix_pathinfo=1|g' /etc/php5/fpm/php.ini
+			backup /etc/php5/fpm/php-fpm.conf
+		curl -o /etc/php5/fpm/php-fpm.conf ${CBURL}/etc/php5/fpm/php-fpm.conf
+			backup /etc/php5/fpm/pool.d/www.conf
+		curl --create-dirs -o /etc/php5/fpm/pool.d/phpinfo.conf ${CBURL}/etc/php5/fpm/pool.d/phpinfo.conf
+		# mkdir -p /run/php5-fpm/localhost
+		
+	## PHP Extensions && Composer ##
+		## Base Extensions  ##
+			apt-get -y install php5-intl
+			apt-get -y install php5-dev
+			apt-get -y install php5-curl
+			apt-get -y install php5-apcu
+			apt-get -y install php5-xdebug
+			## apt-get -y install php5-intl php5-dev php5-apcu php5-xdebug php5-curl
+			
+		## Sec & Auth Extensions ##
+			apt-get -y install php5-mcrypt
+			apt-get -y install php5-gnupg
+			apt-get -y install php-auth
+			apt-get -y install php-openid
+			apt-get -y install php5-oauth
+			## apt-get -y install php5-mcrypt  php5-gnupg php-auth php-openid php5-oauth
+			
+		## Parsing Extensions ##
+			apt-get -y install php-xml-parser
+			apt-get -y install php5-xmlrpc
+			apt-get -y install php5-tidy
+			## apt-get -y install php-xml-parser php5-xmlrpc php5-tidy
+			
+		## DB Extensions ##
+			apt-get -y install php5-mysqlnd
+			apt-get -y install php5-pgsql
+			apt-get -y install php5-mongo
+			apt-get -y install php5-redis
+			## apt-get -y install php5-mysqlnd php5-pgsql php5-mongo php5-redis
+			
+		## Graphic Extensions ##
+			apt-get -y install php5-gd
+			apt-get -y install php5-imagick
+			## apt-get -y install php5-gd  php5-imagick
+			
+		## Composer ##
+			curl -sS https://getcomposer.org/installer | php
+			mv composer.phar /usr/local/bin/composer
+		
+	## PHP Info Configuration ##
+		# curl --create-dirs -o /var/www/html/php.${DOMAIN}/index.php ${CBURL}/var/www/html/php/index.php
+		# curl --create-dirs -o /var/www/html/localhost/phpinfo/index.php ${CBURL}/var/www/html/localhost/phpinfo/index.php
+		curl --create-dirs -o /var/www/html/phpinfo/index.php ${CBURL}/var/www/html/localhost/phpinfo/index.php
+		chown -R www-data:www-data /var/www/html
+		
+		# curl -o /etc/nginx/sites-available/php.${DOMAIN} ${CBURL}/etc/nginx/sites-available/php
+		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/php.${DOMAIN}
+		# sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/sites-available/php.${DOMAIN}
+		# ln -s /etc/nginx/sites-available/php.${DOMAIN} /etc/nginx/sites-enabled/php.${DOMAIN}
+		# curl --create-dirs -o /etc/nginx/sites-available/localhost/phpinfo ${CBURL}/etc/nginx/sites-available/localhost/phpinfo
+		# curl --create-dirs -o /etc/nginx/localhost-available/phpinfo ${CBURL}/etc/nginx/localhost-available/phpinfo
+		curl --create-dirs -o /etc/nginx/sites-available/phpinfo ${CBURL}/etc/nginx/sites-available/phpinfo
+		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/localhost/phpinfo
+		# sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/localhost-available/phpinfo
+		# sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/sites-available/phpinfo
+		sed -i 's|{{port}}|443|g' /etc/nginx/sites-available/phpinfo
+		sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/phpinfo
+		# ln -s /etc/nginx/sites-available/localhost/phpinfo /etc/nginx/sites-enabled/localhost/phpinfo
+		# ln -s /etc/nginx/localhost-available/phpinfo /etc/nginx/localhost-enabled/phpinfo
+		ln -s /etc/nginx/sites-available/phpinfo /etc/nginx/sites-enabled/phpinfo
+
+		service php5-fpm restart && service nginx restart
+fi
