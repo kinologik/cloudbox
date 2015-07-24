@@ -50,26 +50,30 @@ if [ $(tty) == /dev/tty1 ]; then
 			## apt-get -y install php5-intl php5-dev php5-apcu php5-xdebug php5-curl
 			
 		## Sec & Auth Extensions ##
-			apt-get -y install php5-mcrypt php5-curl
+			apt-get -y install php5-mcrypt
 			apt-get -y install php5-gnupg
 			apt-get -y install php-auth
 			apt-get -y install php-openid
 			apt-get -y install php5-oauth
+			## apt-get -y install php5-mcrypt  php5-gnupg php-auth php-openid php5-oauth
 			
 		## Parsing Extensions ##
 			apt-get -y install php-xml-parser
 			apt-get -y install php5-xmlrpc
 			apt-get -y install php5-tidy
+			## apt-get -y install php-xml-parser php5-xmlrpc php5-tidy
 			
 		## DB Extensions ##
 			apt-get -y install php5-mysqlnd
 			apt-get -y install php5-pgsql
 			apt-get -y install php5-mongo
 			apt-get -y install php5-redis
+			## apt-get -y install php5-mysqlnd php5-pgsql php5-mongo php5-redis
 			
 		## Graphic Extensions ##
 			apt-get -y install php5-gd
 			apt-get -y install php5-imagick
+			## apt-get -y install php5-gd  php5-imagick
 			
 		## Composer ##
 			curl -sS https://getcomposer.org/installer | php
@@ -77,7 +81,8 @@ if [ $(tty) == /dev/tty1 ]; then
 		
 	## PHP Info Configuration ##
 		# curl --create-dirs -o /var/www/html/php.${DOMAIN}/index.php ${CBURL}/var/www/html/php/index.php
-		curl --create-dirs -o /var/www/html/localhost/phpinfo/index.php ${CBURL}/var/www/html/localhost/phpinfo/index.php
+		# curl --create-dirs -o /var/www/html/localhost/phpinfo/index.php ${CBURL}/var/www/html/localhost/phpinfo/index.php
+		curl --create-dirs -o /var/www/html/phpinfo/index.php ${CBURL}/var/www/html/localhost/phpinfo/index.php
 		chown -R www-data:www-data /var/www/html
 		
 		# curl -o /etc/nginx/sites-available/php.${DOMAIN} ${CBURL}/etc/nginx/sites-available/php
@@ -85,11 +90,14 @@ if [ $(tty) == /dev/tty1 ]; then
 		# sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/sites-available/php.${DOMAIN}
 		# ln -s /etc/nginx/sites-available/php.${DOMAIN} /etc/nginx/sites-enabled/php.${DOMAIN}
 		# curl --create-dirs -o /etc/nginx/sites-available/localhost/phpinfo ${CBURL}/etc/nginx/sites-available/localhost/phpinfo
-		curl --create-dirs -o /etc/nginx/localhost-available/phpinfo ${CBURL}/etc/nginx/localhost-available/phpinfo
+		# curl --create-dirs -o /etc/nginx/localhost-available/phpinfo ${CBURL}/etc/nginx/localhost-available/phpinfo
+		curl --create-dirs -o /etc/nginx/sites-available/phpinfo ${CBURL}/etc/nginx/localhost-available/phpinfo
 		# sed -i 's|{{domain}}|'${DOMAIN}'|g' /etc/nginx/sites-available/localhost/phpinfo
-		sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/localhost-available/phpinfo
+		# sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/localhost-available/phpinfo
+		sed -i 's|{{port}}|'${HTTPPORT}'|g' /etc/nginx/sites-available/phpinfo
 		# ln -s /etc/nginx/sites-available/localhost/phpinfo /etc/nginx/sites-enabled/localhost/phpinfo
-		ln -s /etc/nginx/localhost-available/phpinfo /etc/nginx/localhost-enabled/phpinfo
+		# ln -s /etc/nginx/localhost-available/phpinfo /etc/nginx/localhost-enabled/phpinfo
+		ln -s /etc/nginx/sites-available/phpinfo /etc/nginx/sites-enabled/phpinfo
 
 		service php5-fpm restart && service nginx restart
 fi
