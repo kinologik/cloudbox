@@ -1,24 +1,12 @@
 server {
-	listen {{port}};
-	listen [::]:{{port}};
+	listen 443;
+	listen [::]:443;
     
-	server_name phpinfo.{{domain}};
-    
+	server_name phpinfo.kinologik.net;
 	root /var/www/html/phpinfo;
-    
-	location / {
-		index index.html;
-		try_files $uri $uri/ =404;
-	}
-    
-	location /phpinfo/ {
-		alias /var/www/html/phpinfo/;
-		index index.php;
-	}
+	index index.html index.php;
  
-	location ~ ^/phpinfo/(.+\.php)$ {
-		alias /var/www/html/phpinfo/$1;
-		
+	location ~ \.php$ {
 		fastcgi_pass unix:/var/run/php5-fpm.phpinfo.sock;
 		fastcgi_index  index.php;
 		fastcgi_param  SCRIPT_FILENAME  $request_filename;
