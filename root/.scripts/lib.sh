@@ -23,3 +23,13 @@ clear_history() {
 	history -c
 	cat /dev/null > /var/log/syslog
 }
+
+nginx_passwrd() {
+	NGINXUSR=${1}
+	NGINXPWD=${2}
+	if [ -f /etc/nginx/.htpasswd ]; then
+		htpasswd -bBC 16 /etc/nginx/.htpasswd ${NGINXUSR} ${NGINXPWD}
+	else
+		htpasswd -cbBC 16 /etc/nginx/.htpasswd ${NGINXUSR} ${NGINXPWD}
+	fi
+}
